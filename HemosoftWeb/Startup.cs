@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using HemoSoft.DAL;
+using HemoSoft.Models;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,6 +29,16 @@ namespace HemosoftWeb
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddScoped<DoacaoDAO>();
+            services.AddScoped<DoadorDAO>();
+            services.AddScoped<SolicitacaoDAO>();
+            services.AddScoped<SolicitanteDAO>();
+            services.AddScoped<TriadorDAO>();
+
+            services.AddDbContext<Context>
+                (options => options.UseSqlServer
+                (Configuration.GetConnectionString
+                ("HemosoftWeb")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
