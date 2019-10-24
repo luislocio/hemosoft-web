@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aluno\\Downloads\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj": {}
+    "C:\\Users\\Aluno\\Downloads\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aluno\\Downloads\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj": {
+    "C:\\Users\\Aluno\\Downloads\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aluno\\Downloads\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj",
+        "projectUniqueName": "C:\\Users\\Aluno\\Downloads\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj",
         "projectName": "HemosoftWeb",
-        "projectPath": "C:\\Users\\Aluno\\Downloads\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj",
+        "projectPath": "C:\\Users\\Aluno\\Downloads\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aluno\\Downloads\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb\\obj\\",
+        "outputPath": "C:\\Users\\Aluno\\Downloads\\HemosoftWeb\\HemosoftWeb\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
