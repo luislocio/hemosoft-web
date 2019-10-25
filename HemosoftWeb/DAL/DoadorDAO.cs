@@ -1,13 +1,18 @@
-﻿using HemoSoft.Model;
+﻿using HemoSoft.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace HemoSoft.DAL
 {
     class DoadorDAO
     {
-        private static Context ctx = SingletonContext.GetInstance();
+        private readonly Context _context;
+        public DoadorDAO(Context context)
+        {
+            _context = context;
+        }
+
         public static bool CadastrarDoador(Doador d)
         {
             if (BuscarDoadorPorCpf(d) != null)
@@ -15,41 +20,41 @@ namespace HemoSoft.DAL
                 return false;
             }
 
-            ctx.Doadores.Add(d);
-            ctx.SaveChanges();
+            _context.Doadores.Add(d);
+            _context.SaveChanges();
             return true;
         }
 
         public static Doador BuscarDoadorPorCpf(Doador d)
         {
-            return ctx.Doadores
+            return _context.Doadores
                 .Include("Doacoes")
                 .FirstOrDefault(x => x.Cpf.Equals(d.Cpf));
         }
 
         public static Doador BuscarDoadorPorNomeCompleto(Doador d)
         {
-            return ctx.Doadores.FirstOrDefault
+            return _context.Doadores.FirstOrDefault
                 (x => x.NomeCompleto.Equals(d.NomeCompleto));
         }
 
         public static List<Doador> BuscarDoadorPorParteNome(Doador d)
         {
             //Where: é método que retorna todas as ocorrências em uma busca
-            return ctx.Doadores.Where
+            return _context.Doadores.Where
                 (x => x.NomeCompleto.Contains(d.NomeCompleto)).ToList();
         }
 
         public static Doador BuscarDoadorPorEstadoCivil(Doador d)
         {
-            return ctx.Doadores.FirstOrDefault
+            return _context.Doadores.FirstOrDefault
                 (x => x.EstadoCivil.Equals(d.EstadoCivil));
         }
 
         public static void AlterarDoador(Doador d)
         {
-            ctx.Entry(d).State = EntityState.Modified;
-            ctx.SaveChanges();
+            _context.Entry(d).State = EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using HemoSoft.Model;
+﻿using HemoSoft.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 
 namespace HemoSoft.DAL

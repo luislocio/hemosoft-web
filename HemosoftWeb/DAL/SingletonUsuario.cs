@@ -1,4 +1,4 @@
-﻿using HemoSoft.Model;
+﻿using HemoSoft.Models;
 
 namespace HemoSoft.DAL
 {

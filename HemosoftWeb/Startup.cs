@@ -38,7 +38,7 @@ namespace HemosoftWeb
             services.AddDbContext<Context>
                 (options => options.UseSqlServer
                 (Configuration.GetConnectionString
-                ("HemosoftWeb")));
+                ("HemosoftWebConnection")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
