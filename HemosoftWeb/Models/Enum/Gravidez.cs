@@ -1,4 +1,4 @@
-﻿namespace HemoSoft.Models.Enum
+﻿namespace HemosoftWeb.Models.Enum
 {
     public enum Gravidez
     {

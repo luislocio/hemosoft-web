@@ -1,7 +1,6 @@
-﻿using HemoSoft.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace HemoSoft.Models
+namespace HemosoftWeb.Models
 {
     public class Context : DbContext
     { 

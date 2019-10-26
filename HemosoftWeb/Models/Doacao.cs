@@ -1,9 +1,9 @@
-﻿using HemoSoft.Models.Enum;
+﻿using HemosoftWeb.Models.Enum;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HemoSoft.Models
+namespace HemosoftWeb.Models
 {
     [Table("Doacoes")]
     public class Doacao
@@ -14,9 +14,18 @@ namespace HemoSoft.Models
         public Doador Doador { get; set; }
         public Triador Triador { get; set; }
         public Solicitacao Solicitacao { get; set; }
-        [Required] public TriagemClinica TriagemClinica { get; set; }
-        [Required] public TriagemLaboratorial TriagemLaboratorial { get; set; }
-        [Required] public ImpedimentosTemporarios ImpedimentosTemporarios { get; set; }
-        [Required] public ImpedimentosDefinitivos ImpedimentosDefinitivos { get; set; }
+        public int IdTriagemClinica { get; set; }
+        public int IdTriagemLaboratorial { get; set; }
+        public int IdImpedimentosTemporarios { get; set; }
+        public int IdImpedimentosDefinitivos { get; set; }
+
+        [ForeignKey("IdTriagemClinica")]
+        public TriagemClinica TriagemClinica { get; set; }
+        [ForeignKey("IdTriagemLaboratorial")]
+        public TriagemLaboratorial TriagemLaboratorial { get; set; }
+        [ForeignKey("IdImpedimentosTemporarios")]
+        public ImpedimentosTemporarios ImpedimentosTemporarios { get; set; }
+        [ForeignKey("IdImpedimentosDefinitivos")]
+        public ImpedimentosDefinitivos ImpedimentosDefinitivos { get; set; }
     }
 }

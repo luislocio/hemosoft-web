@@ -1,8 +1,8 @@
-﻿using HemoSoft.Models.Enum;
+﻿using HemosoftWeb.Models.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HemoSoft.Models
+namespace HemosoftWeb.Models
 {
     [Table("TriagensLaboratoriais")]
     public class TriagemLaboratorial

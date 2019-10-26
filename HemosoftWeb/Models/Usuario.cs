@@ -1,6 +1,6 @@
-﻿using HemoSoft.Models.Enum;
+﻿using HemosoftWeb.Models.Enum;
 
-namespace HemoSoft.Models
+namespace HemosoftWeb.Models
 {
     public class Usuario
     {
