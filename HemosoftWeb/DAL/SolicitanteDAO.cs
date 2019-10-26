@@ -1,4 +1,5 @@
 ﻿using HemoSoft.Models;
+using HemosoftWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,55 +8,59 @@ namespace HemoSoft.DAL
 {
     class SolicitanteDAO
     {
-        private static Context ctx = SingletonContext.GetInstance();
+        private readonly Context _context;
+        public SolicitanteDAO(Context context)
+        {
+            _context = context;
+        }
 
-        public static bool CadastrarSolicitante(Solicitante s)
+        public bool CadastrarSolicitante(Solicitante s)
         {
             if (BuscarSolicitantePorCnpj(s) != null)
             {
                 return false;
             }
 
-            ctx.Solicitantes.Add(s);
-            ctx.SaveChanges();
+            _context.Solicitantes.Add(s);
+            _context.SaveChanges();
             return true;
         }
 
-        public static Solicitante BuscarSolicitantePorCnpj(Solicitante s)
+        public Solicitante BuscarSolicitantePorCnpj(Solicitante s)
         {
-            return ctx.Solicitantes.FirstOrDefault
+            return _context.Solicitantes.FirstOrDefault
                 (x => x.Cnpj.Equals(s.Cnpj));
         }
 
-        public static Solicitante BuscarSolicitantePorId(Solicitante s)
+        public Solicitante BuscarSolicitantePorId(Solicitante s)
         {
-            return ctx.Solicitantes.FirstOrDefault
+            return _context.Solicitantes.FirstOrDefault
                 (x => x.IdSolicitante.Equals(s.IdSolicitante));
         }
 
-        public static Solicitante BuscarSolicitantePorRazaoSocial(Solicitante s)
+        public Solicitante BuscarSolicitantePorRazaoSocial(Solicitante s)
         {
-            return ctx.Solicitantes.FirstOrDefault
+            return _context.Solicitantes.FirstOrDefault
                 (x => x.RazaoSocial.Equals(s.RazaoSocial));
         }
 
 
-        public static List<Solicitante> BuscarSolicitantesPorParteDoNome(Solicitante s)
+        public List<Solicitante> BuscarSolicitantesPorParteDoNome(Solicitante s)
         {
             //Where: é método que retorna todas as ocorrências em uma busca
-            return ctx.Solicitantes.Where
+            return _context.Solicitantes.Where
                 (x => x.RazaoSocial.Contains(s.RazaoSocial)).ToList();
         }
 
-        public static List<Solicitante> ListarSolicitantes()
+        public List<Solicitante> ListarSolicitantes()
         {
-            return ctx.Solicitantes.ToList();
+            return _context.Solicitantes.ToList();
         }
 
-        public static void AlterarSolicitante(Solicitante s)
+        public void AlterarSolicitante(Solicitante s)
         {
-            ctx.Entry(s).State = EntityState.Modified;
-            ctx.SaveChanges();
+            _context.Solicitantes.Update(s);
+            _context.SaveChanges();
         }
     }
 }

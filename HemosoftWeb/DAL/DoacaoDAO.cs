@@ -1,4 +1,4 @@
-﻿using HemoSoft.Models;
+﻿using HemosoftWeb.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,18 +7,23 @@ namespace HemoSoft.DAL
 {
     class DoacaoDAO
     {
-        private static Context ctx = SingletonContext.GetInstance();
-        public static void CadastrarDoacao(Doacao d)
+        private readonly Context _context;
+        public DoacaoDAO(Context context)
         {
-            ctx.Doacoes.Add(d);
-            ctx.SaveChanges();
+            _context = context;
         }
 
-        public static Doacao BuscarUltimaDoacaoPorDoador(Doador d)
+        public void CadastrarDoacao(Doacao d)
+        {
+            _context.Doacoes.Add(d);
+            _context.SaveChanges();
+        }
+
+        public Doacao BuscarUltimaDoacaoPorDoador(Doador d)
         {
             //Where: é método que retorna todas as
             //ocorrências em uma busca
-            return ctx.Doacoes
+            return _context.Doacoes
                 .Include("Doador")
                 .Include("TriagemClinica")
                 .Include("TriagemLaboratorial")
@@ -28,16 +33,16 @@ namespace HemoSoft.DAL
                 .FirstOrDefault(x => x.Doador.IdDoador.Equals(d.IdDoador));
         }
 
-        public static bool VerificarDoacoesPorStatusTriagemLaboratorial(TriagemLaboratorial t)
+        public bool VerificarDoacoesPorStatusTriagemLaboratorial(TriagemLaboratorial t)
         {
-            return ctx.Doacoes.Any(x => x.TriagemLaboratorial.StatusTriagem == t.StatusTriagem);
+            return _context.Doacoes.Any(x => x.TriagemLaboratorial.StatusTriagem == t.StatusTriagem);
         }
 
-        public static Doacao BuscarDoacaoPorId(Doacao d)
+        public Doacao BuscarDoacaoPorId(Doacao d)
         {
             //Where: é método que retorna todas as
             //ocorrências em uma busca
-            return ctx.Doacoes
+            return _context.Doacoes
                 .Include("Doador")
                 .Include("TriagemClinica")
                 .Include("TriagemLaboratorial")
@@ -46,11 +51,11 @@ namespace HemoSoft.DAL
                 .FirstOrDefault(x => x.IdDoacao.Equals(d.IdDoacao));
         }
 
-        public static List<Doacao> BuscarDoacaoPorStatus(Doacao d)
+        public List<Doacao> BuscarDoacaoPorStatus(Doacao d)
         {
             //Where: é método que retorna todas as
             //ocorrências em uma busca
-            return ctx.Doacoes
+            return _context.Doacoes
                 .Include("Doador")
                 .Include("TriagemClinica")
                 .Include("TriagemLaboratorial")
@@ -59,10 +64,10 @@ namespace HemoSoft.DAL
                 .Where(x => x.StatusDoacao == d.StatusDoacao).ToList();
         }
 
-        public static void AlterarDoacao(Doacao d)
+        public void AlterarDoacao(Doacao d)
         {
-            ctx.Entry(d).State = EntityState.Modified;
-            ctx.SaveChanges();
+            _context.Doacoes.Update(d);
+            _context.SaveChanges();
         }
     }
 }

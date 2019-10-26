@@ -1,5 +1,6 @@
 ﻿using HemoSoft.Models;
-using System;
+using HemosoftWeb.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,17 +8,21 @@ namespace HemoSoft.DAL
 {
     class SolicitacaoDAO
     {
-
-        private static Context ctx = SingletonContext.GetInstance();
-        public static void CadastrarSolicitacao(Solicitacao so)
+        private readonly Context _context;
+        public SolicitacaoDAO(Context context)
         {
-            ctx.Solicitacoes.Add(so);
-            ctx.SaveChanges();
+            _context = context;
         }
 
-        public static List<Solicitacao> BuscarSolicitacoesPorSolicitante(Solicitacao s)
+        public void CadastrarSolicitacao(Solicitacao so)
         {
-            return ctx.Solicitacoes
+            _context.Solicitacoes.Add(so);
+            _context.SaveChanges();
+        }
+
+        public List<Solicitacao> BuscarSolicitacoesPorSolicitante(Solicitacao s)
+        {
+            return _context.Solicitacoes
                 .Include("Solicitante")
                 .Include("Doacoes")
                 .Where(x => x.Solicitante.IdSolicitante.Equals(s.Solicitante.IdSolicitante))
@@ -25,18 +30,18 @@ namespace HemoSoft.DAL
 
         }
 
-        public static Solicitacao BuscarSolicitacaoPorId(Solicitacao s)
+        public Solicitacao BuscarSolicitacaoPorId(Solicitacao s)
         {
-            return ctx.Solicitacoes
+            return _context.Solicitacoes
                 .Include("Solicitante")
                 .Include("Doacoes")
                 .FirstOrDefault
                 (x => x.IdSolicitacao.Equals(s.IdSolicitacao));
         }
 
-        public static List<Solicitacao> ListarSolicitacoes()
+        public List<Solicitacao> ListarSolicitacoes()
         {
-            return ctx.Solicitacoes
+            return _context.Solicitacoes
                 .Include("Solicitante")
                 .Include("Doacoes")
                 .ToList();

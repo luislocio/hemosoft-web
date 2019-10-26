@@ -1,4 +1,5 @@
 ﻿using HemoSoft.Models;
+using HemosoftWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,42 +8,44 @@ namespace HemoSoft.DAL
 {
     class TriadorDAO
     {
-        private static Context ctx = SingletonContext.GetInstance();
-
-        public static bool CadastrarTriador(Triador t)
+        private readonly Context _context;
+        public TriadorDAO(Context context)
         {
-            if (BuscarTriadorPorMatricula(t) != null)
-            {
-                return false;
-            }
-
-            ctx.Triadores.Add(t);
-            ctx.SaveChanges();
-
-            return true;
+            _context = context;
         }
 
-        public static Triador BuscarTriadorPorMatricula(Triador t)
+        public bool CadastrarTriador(Triador t)
         {
-            return ctx.Triadores.FirstOrDefault
+            if (BuscarTriadorPorMatricula(t) == null)
+            {
+                _context.Triadores.Add(t);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public Triador BuscarTriadorPorMatricula(Triador t)
+        {
+            return _context.Triadores.FirstOrDefault
                 (x => x.Matricula.Equals(t.Matricula));
         }
 
-        public static Triador BuscarTriadorPorId(Triador t)
+        public Triador BuscarTriadorPorId(Triador t)
         {
-            return ctx.Triadores.FirstOrDefault
+            return _context.Triadores.FirstOrDefault
                 (x => x.IdTriador.Equals(t.IdTriador));
         }
 
-        public static List<Triador> ListarTriadores()
+        public List<Triador> ListarTriadores()
         {
-            return ctx.Triadores.ToList();
+            return _context.Triadores.ToList();
         }
 
-        public static void AlterarTriador(Triador t)
+        public void AlterarTriador(Triador t)
         {
-            ctx.Entry(t).State = EntityState.Modified;
-            ctx.SaveChanges();
+            _context.Triadores.Update(t);
+            _context.SaveChanges();
         }
     }
 }
