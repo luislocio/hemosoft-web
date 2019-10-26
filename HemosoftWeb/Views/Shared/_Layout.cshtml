@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -13,6 +12,46 @@
         <a class="navbar-brand" href="#">
             Hemosoft Web
         </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="doador" asp-action="cadastrar">
+                        Cadastrar Doador
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="doador" asp-action="buscar">
+                        Buscar Doador
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="doacao" asp-action="buscar">
+                        Buscar Doações
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="solicitacao" asp-action="listar">
+                        Listar Solicitações
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="triador" asp-action="cadastrar">
+                        Cadastrar Triador
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" asp-controller="solicitante" asp-action="cadastrar">
+                        Cadastrar Solicitante
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </nav>
     @* Conteúdo *@
     <div class="m-5">
@@ -21,7 +60,7 @@
     @* Rodapé *@
     <footer class="footer">
         <div class="container" id="footer-content">
-            <span class="text-muted" >
+            <span class="text-muted">
                 &copy; @DateTime.Now.Year - Desenvolvido por
                 Diego, Luis e Yuri
             </span>
