@@ -12,5 +12,11 @@ namespace HemosoftWeb.Controllers
         {
             return View();
         }
+
+        // GET: Doador
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
     }
 }

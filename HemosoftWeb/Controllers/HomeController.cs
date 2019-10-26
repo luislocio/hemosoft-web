@@ -15,11 +15,5 @@ namespace HemosoftWeb.Controllers
         {
             return View();
         }
-
-        // GET: Doador/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
     }
 }
