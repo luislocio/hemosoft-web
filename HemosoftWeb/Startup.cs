@@ -1,5 +1,6 @@
 ﻿using HemoSoft.DAL;
 using HemoSoft.Models;
+using HemosoftWeb.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
