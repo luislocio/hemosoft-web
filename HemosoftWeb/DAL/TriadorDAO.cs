@@ -18,6 +18,8 @@ namespace HemosoftWeb.DAL
         {
             if (BuscarTriadorPorMatricula(t) == null)
             {
+                t.StatusUsuario = Models.Enum.StatusUsuario.Ativo;
+
                 _context.Triadores.Add(t);
                 _context.SaveChanges();
                 return true;

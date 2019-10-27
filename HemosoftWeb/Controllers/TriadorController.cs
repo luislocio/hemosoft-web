@@ -1,31 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HemosoftWeb.DAL;
+using HemosoftWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HemosoftWeb.Controllers
 {
     public class TriadorController : Controller
     {
-        public IActionResult Index()
+        private readonly TriadorDAO _traidorDAO;
+        public TriadorController(TriadorDAO triadorDAO)
         {
-            return View();
+            _traidorDAO = triadorDAO;
         }
 
-        // GET: Doador
         public IActionResult Cadastrar()
         {
             return View();
         }
 
-        // GET: Doador
+        [HttpPost]
+        public IActionResult Cadastrar(Triador t)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_traidorDAO.CadastrarTriador(t))
+                {
+                    // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
+                    return RedirectToAction("Index", "Home", "Index");
+                }
+                // TODO: [REGRA] - Redirecionar para o perfil do doador. 
+                ModelState.AddModelError("", "Esse triador já existe!");
+                return View(t);
+            }
+            return View(t);
+        }
+
         public IActionResult Listar()
         {
             return View();
         }
 
-        // GET: Doador
         public IActionResult Perfil()
         {
             return View();

@@ -1,6 +1,34 @@
-﻿@{
-    ViewData["Title"] = "cadastrar";
+﻿@model HemosoftWeb.Models.Triador
+@using HemosoftWeb.Models.Enum
+@{
+    ViewData["Title"] = "Cadastrar Triador";
 }
 
-<h2>cadastrar</h2>
+<h2>Cadastro de Triadores</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <form asp-action="cadastrar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Matricula" class="control-label">Matricula</label>
+                <input asp-for="Matricula" class="form-control" />
+                <span asp-validation-for="Matricula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomeCompleto" class="control-label">Nome Completo</label>
+                <input asp-for="NomeCompleto" class="form-control" />
+                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Senha" class="control-label">Senha</label>
+                <input asp-for="Senha" class="form-control" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
 
