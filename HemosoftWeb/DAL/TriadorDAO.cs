@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HemoSoft.DAL
+namespace HemosoftWeb.DAL
 {
-    class TriadorDAO
+    public class TriadorDAO
     {
         private readonly Context _context;
         public TriadorDAO(Context context)

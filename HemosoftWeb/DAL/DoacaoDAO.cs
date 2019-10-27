@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HemoSoft.DAL
+namespace HemosoftWeb.DAL
 {
-    class DoacaoDAO
+    public class DoacaoDAO
     {
         private readonly Context _context;
         public DoacaoDAO(Context context)

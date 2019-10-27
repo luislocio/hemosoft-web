@@ -1,7 +1,7 @@
 ﻿using HemoSoft.Models;
 using HemosoftWeb.Models;
 
-namespace HemoSoft.DAL
+namespace HemosoftWeb.DAL
 {
     class SingletonUsuario
     {

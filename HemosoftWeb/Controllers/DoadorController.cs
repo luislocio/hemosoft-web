@@ -1,36 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using HemosoftWeb.DAL;
 using HemosoftWeb.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HemosoftWeb.Controllers
 {
     public class DoadorController : Controller
     {
-        private readonly Context _context;
-
-        public DoadorController(Context context)
+        private readonly DoadorDAO _doadorDAO;
+        public DoadorController(DoadorDAO doadorDAO)
         {
-            _context = context;
+            _doadorDAO = doadorDAO;
         }
 
-        // GET: Doador
         public IActionResult Cadastrar()
         {
             return View();
         }
 
-        // GET: Doador
+        [HttpPost]
+        public IActionResult Cadastrar(Doador d)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_doadorDAO.CadastrarDoador(d))
+                {
+                    // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
+                    return RedirectToAction("Index", "Home", "Index");
+                }
+                // TODO: [REGRA] - Redirecionar para o perfil do doador. 
+                ModelState.AddModelError("", "Esse doador já existe!");
+                return View(d);
+            }
+            return View(d);
+        }
+
         public IActionResult Buscar()
         {
             return View();
         }
 
-        // GET: Doador
         public IActionResult Perfil()
         {
             return View();

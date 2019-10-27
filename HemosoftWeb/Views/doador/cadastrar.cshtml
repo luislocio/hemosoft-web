@@ -1,4 +1,5 @@
 ﻿@model HemosoftWeb.Models.Doador
+@using HemosoftWeb.Models.Enum
 @{
     ViewData["Title"] = "Cadastro de Doadores";
 }
@@ -15,18 +16,18 @@
                 <span asp-validation-for="Cpf" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EstadoCivil" class="control-label">Estado Civil</label>
-                <select asp-for="EstadoCivil" class="form-control"></select>
-                <span asp-validation-for="EstadoCivil" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="NomeCompleto" class="control-label">Nome Completo</label>
                 <input asp-for="NomeCompleto" class="form-control" />
                 <span asp-validation-for="NomeCompleto" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="EstadoCivil" class="control-label">Estado Civil</label>
+                <select asp-for="EstadoCivil" asp-items="Html.GetEnumSelectList<EstadoCivil>()" class="form-control"></select>
+                <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Genero" class="control-label">Gênero</label>
-                <select asp-for="Genero" class="form-control"></select>
+                <select asp-for="Genero" asp-items="Html.GetEnumSelectList<Genero>()" class="form-control"></select>
                 <span asp-validation-for="Genero" class="text-danger"></span>
             </div>
             <div class="form-group">

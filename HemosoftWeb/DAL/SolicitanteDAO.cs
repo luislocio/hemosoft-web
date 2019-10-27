@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HemoSoft.DAL
+namespace HemosoftWeb.DAL
 {
-    class SolicitanteDAO
+    public class SolicitanteDAO
     {
         private readonly Context _context;
         public SolicitanteDAO(Context context)

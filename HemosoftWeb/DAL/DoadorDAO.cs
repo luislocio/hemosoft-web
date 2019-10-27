@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HemoSoft.DAL
+namespace HemosoftWeb.DAL
 {
-    class DoadorDAO
+    public class DoadorDAO
     {
         private readonly Context _context;
         public DoadorDAO(Context context)
@@ -14,6 +14,7 @@ namespace HemoSoft.DAL
             _context = context;
         }
 
+        //Métodos dentro de um controller são de chamadosde actions
         public bool CadastrarDoador(Doador d)
         {
             if (BuscarDoadorPorCpf(d) != null)
