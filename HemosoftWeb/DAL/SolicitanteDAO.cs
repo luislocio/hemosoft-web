@@ -16,14 +16,17 @@ namespace HemosoftWeb.DAL
 
         public bool CadastrarSolicitante(Solicitante s)
         {
-            if (BuscarSolicitantePorCnpj(s) != null)
+            if (BuscarSolicitantePorCnpj(s) == null)
             {
-                return false;
+                s.StatusUsuario = Models.Enum.StatusUsuario.Ativo;
+
+                _context.Solicitantes.Add(s);
+                _context.SaveChanges();
+
+                return true;
             }
 
-            _context.Solicitantes.Add(s);
-            _context.SaveChanges();
-            return true;
+                       return false;
         }
 
         public Solicitante BuscarSolicitantePorCnpj(Solicitante s)
