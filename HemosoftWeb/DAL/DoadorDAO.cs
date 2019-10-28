@@ -14,17 +14,16 @@ namespace HemosoftWeb.DAL
             _context = context;
         }
 
-        //Métodos dentro de um controller são de chamadosde actions
+        //Métodos dentro de um controller são de chamados de actions
         public bool CadastrarDoador(Doador d)
         {
-            if (BuscarDoadorPorCpf(d) != null)
+            if (BuscarDoadorPorCpf(d) == null)
             {
-                return false;
+                _context.Doadores.Add(d);
+                _context.SaveChanges();
+                return true;
             }
-
-            _context.Doadores.Add(d);
-            _context.SaveChanges();
-            return true;
+            return false;
         }
 
         public Doador BuscarDoadorPorCpf(Doador d)

@@ -22,6 +22,7 @@ namespace HemosoftWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                // TODO: [INPUT] - Validar cpf.
                 if (_doadorDAO.CadastrarDoador(d))
                 {
                     // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
