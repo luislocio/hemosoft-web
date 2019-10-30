@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HemosoftWeb", "HemosoftWeb\HemosoftWeb.csproj", "{11A8DB37-9822-4076-91C3-9AB0D6FB5ACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HemosoftWeb", "HemosoftWeb\HemosoftWeb.csproj", "{11A8DB37-9822-4076-91C3-9AB0D6FB5ACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{10C0BFFE-A466-45D0-88A6-0E85128B8381}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{FB18852F-13CA-4359-BBBD-B2FE50A72877}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{11A8DB37-9822-4076-91C3-9AB0D6FB5ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11A8DB37-9822-4076-91C3-9AB0D6FB5ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11A8DB37-9822-4076-91C3-9AB0D6FB5ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10C0BFFE-A466-45D0-88A6-0E85128B8381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10C0BFFE-A466-45D0-88A6-0E85128B8381}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10C0BFFE-A466-45D0-88A6-0E85128B8381}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10C0BFFE-A466-45D0-88A6-0E85128B8381}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB18852F-13CA-4359-BBBD-B2FE50A72877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB18852F-13CA-4359-BBBD-B2FE50A72877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB18852F-13CA-4359-BBBD-B2FE50A72877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB18852F-13CA-4359-BBBD-B2FE50A72877}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

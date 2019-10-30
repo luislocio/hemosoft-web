@@ -1,6 +1,6 @@
-﻿using HemosoftWeb.DAL;
-using HemosoftWeb.Models;
+﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Repository.DAL;
 
 namespace HemosoftWeb.Controllers
 {
