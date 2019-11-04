@@ -1,6 +1,8 @@
 ﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Repository.DAL;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace HemosoftWeb.Controllers
 {
@@ -66,7 +68,11 @@ namespace HemosoftWeb.Controllers
 
         public IActionResult Perfil(Doador doador)
         {
-
+            if (doador.Doacoes == null)
+            {
+                doador.Doacoes = new List<Doacao>();
+            }
+            ViewBag.doacoes = doador.Doacoes;
             return View();
         }
     }

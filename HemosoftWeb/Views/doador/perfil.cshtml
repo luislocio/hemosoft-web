@@ -1,6 +1,70 @@
-﻿@{
-    ViewData["Title"] = "perfil";
+﻿@model Domain.Models.Doador
+@using Domain.Enum
+@{
+    ViewData["Title"] = "Perfil do doador";
+    List<Doacao> doacoes = ViewBag.doacoes;
 }
 
-<h2>perfil</h2>
-
+<h2>Perfil do doador</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <form asp-action="cadastrar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TipoSanguineo" class="control-label">Tipo Sanguineo</label>
+                <input asp-for="TipoSanguineo" class="form-control" readonly />
+                <span asp-validation-for="TipoSanguineo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cpf" class="control-label">CPF</label>
+                <input asp-for="Cpf" class="form-control" readonly />
+                <span asp-validation-for="Cpf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomeCompleto" class="control-label">Nome Completo</label>
+                <input asp-for="NomeCompleto" class="form-control" readonly />
+                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstadoCivil" class="control-label">Estado Civil</label>
+                <select asp-for="EstadoCivil" asp-items="Html.GetEnumSelectList<EstadoCivil>()" class="form-control" disabled></select>
+                <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Genero" class="control-label">Gênero</label>
+                <select asp-for="Genero" asp-items="Html.GetEnumSelectList<Genero>()" class="form-control" disabled></select>
+                <span asp-validation-for="Genero" class="text-danger"></span>
+            </div>
+            
+            @* Tabela de doações *@
+            <table style="margin-bottom:15px;margin-top:15px"
+                   class="table table-hover table-striped">
+                <thead>
+                    <tr class="table-active">
+                        <th># Doação</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Doacao item in doacoes)
+                    {
+                        <tr>
+                            <td>@item.IdDoacao</td>
+                            <td>@item.DataDoacao</td>
+                            <td>@item.StatusDoacao </td>
+                            <td>
+                                <a class="btn btn-primary" asp-action="Remover" asp-route-id="@item.IdDoacao">Remover</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" asp-action="Alterar" asp-route-id="@item.IdDoacao">Alterar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
