@@ -29,7 +29,7 @@ namespace HemosoftWeb.Controllers
                     return RedirectToAction("Index", "Home", "Index");
                 }
                 // TODO: [REGRA] - Redirecionar para o perfil do doador. 
-                ModelState.AddModelError("", "Esse doador já existe!");
+                ModelState.AddModelError("", "Esse doador já possui cadastro.");
                 return View(d);
             }
             return View(d);
@@ -40,8 +40,33 @@ namespace HemosoftWeb.Controllers
             return View();
         }
 
-        public IActionResult Perfil()
+        [HttpPost]
+        public IActionResult Buscar(string cpf)
         {
+            // TODO: [INPUT] - Validar cpf.
+            if (cpf != null)
+            {
+                Doador parametroDaBusca = new Doador { Cpf = cpf };
+                Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorCpf(parametroDaBusca);
+
+                if (resultadoDaBusca != null)
+                {
+                    return RedirectToAction("perfil", resultadoDaBusca);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Nenhum doador encontrado.");
+                    return View();
+                }
+            }
+
+            ModelState.AddModelError("", "CPF Inválido");
+            return View();
+        }
+
+        public IActionResult Perfil(Doador doador)
+        {
+
             return View();
         }
     }
