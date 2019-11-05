@@ -1,6 +1,31 @@
-﻿@{
-    ViewData["Title"] = "perfil";
+﻿@model Domain.Models.Solicitante
+
+@{
+    ViewData["Title"] = "Perfil do solicitante";
+
 }
 
-<h2>perfil</h2>
-
+<h2>Perfil do solicitante</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <form asp-action="cadastrar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Cnpj" class="control-label">CNPJ</label>
+                <input asp-for="Cnpj" class="form-control" readonly />
+                <span asp-validation-for="Cnpj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RazaoSocial" class="control-label">Razao Social</label>
+                <input asp-for="RazaoSocial" class="form-control" readonly />
+                <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Responsavel" class="control-label">Responsavel</label>
+                <input asp-for="Responsavel" class="form-control" readonly />
+                <span asp-validation-for="Responsavel" class="text-danger"></span>
+            </div>
+    </div>
+    </form>
+</div>

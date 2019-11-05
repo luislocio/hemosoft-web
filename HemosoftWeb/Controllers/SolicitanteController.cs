@@ -1,6 +1,8 @@
 ﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Repository.DAL;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace HemosoftWeb.Controllers
 {
@@ -42,6 +44,50 @@ namespace HemosoftWeb.Controllers
         }
 
 
+        public IActionResult Buscar()
+        {
+            return View();
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult Buscar(string cnpj)
+        {
+            // TODO: [INPUT] - Validar cpf.
+            if (cnpj != null)
+            {
+                Solicitante parametroDaBusca = new Solicitante { Cnpj = cnpj };
+                Solicitante resultadoDaBusca = _solicitanteDAO.BuscarSolicitantePorCnpj(parametroDaBusca);
+
+                if (resultadoDaBusca != null)
+                {
+                    return RedirectToAction("perfil", resultadoDaBusca);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Nenhum solicitante encontrado.");
+                    return View();
+                }
+            }
+
+            ModelState.AddModelError("", "CNPJ Inválido");
+            return View();
+        }
+
+        public IActionResult Perfil(Solicitante solicitante)
+        {
+            if (solicitante.Solicitacoes == null)
+            {
+                solicitante.Solicitacoes = new List<Solicitacao>();
+            }
+            ViewBag.solicitacoes = solicitante.Solicitacoes;
+            return View();
+        }
+
+
+
 
 
         // GET: Solicitante
@@ -50,10 +96,6 @@ namespace HemosoftWeb.Controllers
             return View();
         }
 
-        // GET: Solicitante
-        public IActionResult Perfil()
-        {
-            return View();
-        }
+      
     }
 }
