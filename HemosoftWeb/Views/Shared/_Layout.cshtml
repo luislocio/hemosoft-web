@@ -12,52 +12,78 @@
         <a class="navbar-brand" asp-controller="Home" asp-action="Index">
             Hemosoft Web
         </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="doador" asp-action="cadastrar">
-                        Cadastrar Doador
-                        <span class="sr-only">(current)</span>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownDoador" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Doador
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="doador" asp-action="cadastrar">
+                            Cadastrar Doador
+                            <span class="sr-only">(current)</span>
+                        </a>
+                        <a class="dropdown-item" asp-controller="doador" asp-action="buscar">
+                            Buscar Doador
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </div>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="doador" asp-action="buscar">
-                        Buscar Doador
-                        <span class="sr-only">(current)</span>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownTriador" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Triador
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="triador" asp-action="cadastrar">
+                            Cadastrar Triador
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </div>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="doacao" asp-action="buscar">
-                        Buscar Doações
-                        <span class="sr-only">(current)</span>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownSolicitante" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Solicitante
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="solicitante" asp-action="cadastrar">
+                            Cadastrar Solicitante
+                            <span class="sr-only">(current)</span>
+                        </a>
+                        <a class="dropdown-item" asp-controller="solicitante" asp-action="buscar">
+                            Buscar Solicitante
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </div>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="solicitacao" asp-action="listar">
-                        Listar Solicitações
-                        <span class="sr-only">(current)</span>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownSolicitacao" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Solicitação
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="solicitacao" asp-action="listar">
+                            Listar Solicitações
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </div>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="triador" asp-action="cadastrar">
-                        Cadastrar Triador
-                        <span class="sr-only">(current)</span>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownDoacao" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Doação
                     </a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="solicitante" asp-action="cadastrar">
-                        Cadastrar Solicitante
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="solicitante" asp-action="buscar">
-                        Buscar Solicitante
-                        <span class="sr-only">(current)</span>
-                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                    </div>
                 </li>
             </ul>
         </div>
+
     </nav>
     @* Conteúdo *@
     <div class="m-5">
