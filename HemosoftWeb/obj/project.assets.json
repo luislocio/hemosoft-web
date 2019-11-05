@@ -12573,23 +12573,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Malu\\.nuget\\packages\\": {},
+    "C:\\Users\\Diego\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Luis\\UP\\B9\\Desenvolvimento Microsoft\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj",
+      "projectUniqueName": "C:\\Users\\Diego\\Desktop\\Microsoft\\Hemosoft Web Final\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj",
       "projectName": "HemosoftWeb",
-      "projectPath": "D:\\Luis\\UP\\B9\\Desenvolvimento Microsoft\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj",
-      "packagesPath": "C:\\Users\\Malu\\.nuget\\packages\\",
-      "outputPath": "D:\\Luis\\UP\\B9\\Desenvolvimento Microsoft\\HemosoftWeb\\HemosoftWeb\\obj\\",
+      "projectPath": "C:\\Users\\Diego\\Desktop\\Microsoft\\Hemosoft Web Final\\HemosoftWeb\\HemosoftWeb\\HemosoftWeb.csproj",
+      "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Diego\\Desktop\\Microsoft\\Hemosoft Web Final\\HemosoftWeb\\HemosoftWeb\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Malu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12602,11 +12602,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "D:\\Luis\\UP\\B9\\Desenvolvimento Microsoft\\HemosoftWeb\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\Luis\\UP\\B9\\Desenvolvimento Microsoft\\HemosoftWeb\\Domain\\Domain.csproj"
+            "C:\\Users\\Diego\\Desktop\\Microsoft\\Hemosoft Web Final\\HemosoftWeb\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Diego\\Desktop\\Microsoft\\Hemosoft Web Final\\HemosoftWeb\\Domain\\Domain.csproj"
             },
-            "D:\\Luis\\UP\\B9\\Desenvolvimento Microsoft\\HemosoftWeb\\Repository\\Repository.csproj": {
-              "projectPath": "D:\\Luis\\UP\\B9\\Desenvolvimento Microsoft\\HemosoftWeb\\Repository\\Repository.csproj"
+            "C:\\Users\\Diego\\Desktop\\Microsoft\\Hemosoft Web Final\\HemosoftWeb\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\Diego\\Desktop\\Microsoft\\Hemosoft Web Final\\HemosoftWeb\\Repository\\Repository.csproj"
             }
           }
         }
