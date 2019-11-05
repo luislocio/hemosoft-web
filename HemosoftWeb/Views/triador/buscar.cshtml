@@ -1,14 +1,14 @@
 ﻿@model Domain.Models.Triador
 @{
-    ViewData["Title"] = "Perfil do Triador";
-   
+    ViewData["Title"] = "Busca de Triadores";
 }
 
-<h2>Perfil do Triador</h2>
+<h2>Busca de Triadores</h2>
+
 <hr />
 <div class="row">
     <div class="col-md-4 mx-auto">
-        <form asp-action="listar">
+        <form asp-action="buscar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Matricula" class="control-label">Matricula</label>
@@ -16,11 +16,8 @@
                 <span asp-validation-for="Matricula" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NomeCompleto" class="control-label">Nome Completo</label>
-                <input asp-for="NomeCompleto" class="form-control" />
-                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                <input type="submit" value="Buscar" class="btn btn-default d-flex ml-auto" />
             </div>
-
         </form>
     </div>
 </div>
