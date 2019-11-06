@@ -65,12 +65,11 @@ namespace HemosoftWeb.Controllers
         {
             return View();
         }
-
-        public IActionResult Perfil( Triador triador)
+        public IActionResult Perfil(Triador triador)
         {
             return View();
         }
 
-        
+
     }
 }
