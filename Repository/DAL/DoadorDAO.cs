@@ -51,9 +51,9 @@ namespace Repository.DAL
                 (x => x.EstadoCivil.Equals(d.EstadoCivil));
         }
 
-        public void AlterarDoador(Doador d)
+        public void AlterarDoador(Doador doador)
         {
-            _context.Doadores.Update(d);
+            _context.Doadores.Update(doador);
             _context.SaveChanges();
         }
     }

@@ -75,5 +75,20 @@ namespace HemosoftWeb.Controllers
             ViewBag.doacoes = doador.Doacoes;
             return View();
         }
+
+        public IActionResult Alterar(Doador doador)
+        {
+            if (ModelState.IsValid)
+            {
+                // TODO: [INPUT] - Validar cpf.
+                _doadorDAO.AlterarDoador(doador);
+
+                // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
+                Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorCpf(doador);
+                return RedirectToAction("perfil", resultadoDaBusca);
+            }
+            // TODO: [FEEDBACK] - Mostrar mensagem de erro.
+            return RedirectToAction("perfil", doador);
+        }
     }
 }
