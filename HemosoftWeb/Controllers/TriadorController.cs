@@ -70,6 +70,19 @@ namespace HemosoftWeb.Controllers
             return View();
         }
 
+        public IActionResult Alterar(Triador triador)
+        {
+            if (ModelState.IsValid)
+            {
+                // TODO: [INPUT] - Validar cpf.
+                _triadorDAO.AlterarTriador(triador);
 
+                // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
+                Triador resultadoDaBusca = _triadorDAO.BuscarTriadorPorMatricula(triador);
+                return RedirectToAction("perfil", resultadoDaBusca);
+            }
+            // TODO: [FEEDBACK] - Mostrar mensagem de erro.
+            return RedirectToAction("perfil", triador);
+        }
     }
 }

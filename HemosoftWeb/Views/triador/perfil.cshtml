@@ -1,9 +1,13 @@
 ﻿@model Domain.Models.Triador
 @{
     ViewData["Title"] = "Perfil do Triador";
-   
-}
 
+}
+<style>
+    .invisivel {
+        display: none;
+    }
+</style>
 <h2>Perfil do Triador</h2>
 <hr />
 <div class="row">
@@ -11,16 +15,44 @@
         <form asp-action="listar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <input asp-for="IdTriador" class="form-control" id="inputId" readonly hidden/>
+            </div>
+            <div class="form-group">
                 <label asp-for="Matricula" class="control-label">Matricula</label>
-                <input asp-for="Matricula" class="form-control" />
+                <input asp-for="Matricula" class="form-control" id="inputMatricula" readonly/>
                 <span asp-validation-for="Matricula" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NomeCompleto" class="control-label">Nome Completo</label>
-                <input asp-for="NomeCompleto" class="form-control" />
+                <input asp-for="NomeCompleto" class="form-control" id="inputNomeCompleto" readonly/>
                 <span asp-validation-for="NomeCompleto" class="text-danger"></span>
             </div>
+            <div id="botoes" class="row">
+                <div class="form-group mr-auto ml-3">
+                    <input type="submit" value="Editar perfil" class="btn btn-default" id="btn-editar-perfil" />
+                </div>
 
+                <div class="form-group mr-auto ml-3 invisivel">
+                    <input asp-controller="triador" asp-action="alterar" type="submit" value="Salvar Perfil" class="btn btn-primary" id="btn-salvar-perfil" />
+                </div>
+            </div>
         </form>
     </div>
 </div>
+<script>
+    const botaoEditar = document.getElementById('btn-editar-perfil');
+    const botaoSalvar = document.getElementById('btn-salvar-perfil');
+    botaoEditar.addEventListener('click', event => {
+        event.preventDefault();
+
+        // Habilita campos para edição.
+        document.getElementById("inputMatricula").removeAttribute('readonly');
+        document.getElementById("inputNomeCompleto").removeAttribute('readonly');
+
+        // Esconde o botão EDITAR PERFIL
+        botaoEditar.parentNode.classList.add('invisivel');
+
+        // Mostra o botão SALVAR PERFIL
+        botaoSalvar.parentNode.classList.remove('invisivel');
+    })
+</script>
