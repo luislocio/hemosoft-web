@@ -1,9 +1,14 @@
 ﻿@model Domain.Models.Solicitante
 
 @{
-    ViewData["Title"] = "Perfil do solicitante";
+    ViewData["Title"] = "Perfil do Solicitante";
 
 }
+<style>
+    .invisivel {
+        display: none;
+    }
+</style>
 
 <h2>Perfil do solicitante</h2>
 <hr />
@@ -12,20 +17,50 @@
         <form asp-action="cadastrar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <input asp-for="IdSolicitante" class="form-control" id="inputId" readonly hidden />
+            </div>
+            <div class="form-group">
                 <label asp-for="Cnpj" class="control-label">CNPJ</label>
-                <input asp-for="Cnpj" class="form-control" readonly />
+                <input asp-for="Cnpj" class="form-control" id="inputCNPJ" readonly />
                 <span asp-validation-for="Cnpj" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RazaoSocial" class="control-label">Razao Social</label>
-                <input asp-for="RazaoSocial" class="form-control" readonly />
+                <input asp-for="RazaoSocial" class="form-control" id="inputRazaoSocial" readonly />
                 <span asp-validation-for="RazaoSocial" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Responsavel" class="control-label">Responsavel</label>
-                <input asp-for="Responsavel" class="form-control" readonly />
+                <input asp-for="Responsavel" class="form-control" id="inputResponsavel" readonly />
                 <span asp-validation-for="Responsavel" class="text-danger"></span>
             </div>
+            <div id="botoes" class="row">
+                <div class="form-group mr-auto ml-3">
+                    <input type="submit" value="Editar perfil" class="btn btn-default" id="btn-editar-perfil" />
+                </div>
+
+                <div class="form-group mr-auto ml-3 invisivel">
+                    <input asp-controller="solicitante" asp-action="alterar" type="submit" value="Salvar Perfil" class="btn btn-primary" id="btn-salvar-perfil" />
+                </div>
+            </div>
+        </form>
     </div>
-    </form>
 </div>
+<script>
+    const botaoEditar = document.getElementById('btn-editar-perfil');
+    const botaoSalvar = document.getElementById('btn-salvar-perfil');
+    botaoEditar.addEventListener('click', event => {
+        event.preventDefault();
+
+        // Habilita campos para edição.
+        document.getElementById("inputCNPJ").removeAttribute('readonly');
+        document.getElementById("inputRazaoSocial").removeAttribute('readonly');
+         document.getElementById("inputResponsavel").removeAttribute('readonly');
+
+        // Esconde o botão EDITAR PERFIL
+        botaoEditar.parentNode.classList.add('invisivel');
+
+        // Mostra o botão SALVAR PERFIL
+        botaoSalvar.parentNode.classList.remove('invisivel');
+    })
+</script>

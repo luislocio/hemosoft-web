@@ -43,14 +43,10 @@ namespace HemosoftWeb.Controllers
             return View(s);
         }
 
-
         public IActionResult Buscar()
         {
             return View();
         }
-
-
-
 
         [HttpPost]
         public IActionResult Buscar(string cnpj)
@@ -86,16 +82,26 @@ namespace HemosoftWeb.Controllers
             return View();
         }
 
-
-
-
-
         // GET: Solicitante
         public IActionResult Listar()
         {
             return View();
         }
 
-      
+        public IActionResult Alterar(Solicitante solicitante)
+        {
+            if (ModelState.IsValid)
+            {
+                // TODO: [INPUT] - Validar cpf.
+                _solicitanteDAO.AlterarSolicitante(solicitante);
+
+                // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
+                Solicitante resultadoDaBusca = _solicitanteDAO.BuscarSolicitantePorCnpj(solicitante);
+                return RedirectToAction("perfil", resultadoDaBusca);
+            }
+            // TODO: [FEEDBACK] - Mostrar mensagem de erro.
+            return RedirectToAction("perfil", solicitante);
+        }
+
     }
 }
