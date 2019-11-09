@@ -9,9 +9,16 @@ namespace Domain.Models
     public class Triador
     {
         [Key] public int IdTriador { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string Matricula { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string NomeCompleto { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public string Senha { get; set; }
+
         public StatusUsuario StatusUsuario { get; set; }
         public List<Doacao> Doacoes { get; set; }
     }
