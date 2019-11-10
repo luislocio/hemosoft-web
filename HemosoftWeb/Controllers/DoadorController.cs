@@ -1,6 +1,7 @@
 ﻿using Domain.Models;
 using HemosoftWeb.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Repository.DAL;
 using System.Collections.Generic;
 
@@ -20,13 +21,14 @@ namespace HemosoftWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(Doador d)
+        public IActionResult Cadastrar(Doador doador)
         {
             if (ModelState.IsValid)
             {
-                if (Validacao.CpfEhValido(d.Cpf))
+                if (Validacao.CpfEhValido(doador.Cpf))
                 {
-                    if (_doadorDAO.CadastrarDoador(d))
+                    int idDoador = _doadorDAO.CadastrarDoador(doador);
+                    if (idDoador != 0)
                     {
                         // TODO: [FEEDBACK] - Apresentar mensagem de sucesso.
                         ModelState.AddModelError("Success", "Doador cadastrado com sucesso.");
@@ -36,13 +38,13 @@ namespace HemosoftWeb.Controllers
                         // TODO: [FEEDBACK] - Apresentar mensagem de sucesso.
                         ModelState.AddModelError("Success", "Este doador já possui cadastro.");
                     }
-                    return RedirectToAction("perfil", d);
+                    return RedirectToAction("perfil", new RouteValueDictionary { { "id", idDoador } });
                 }
                 // CPF inválido
                 ModelState.AddModelError("", "CPF Inválido!");
-                return View(d);
+                return View(doador);
             }
-            return View(d);
+            return View(doador);
         }
 
         public IActionResult Buscar()
@@ -60,7 +62,7 @@ namespace HemosoftWeb.Controllers
 
                 if (resultadoDaBusca != null)
                 {
-                    return RedirectToAction("perfil", resultadoDaBusca);
+                    return RedirectToAction("perfil", new RouteValueDictionary { { "id", resultadoDaBusca.IdDoador } });
                 }
                 else
                 {
@@ -72,15 +74,15 @@ namespace HemosoftWeb.Controllers
             return View();
         }
 
-        public IActionResult Perfil(Doador doador)
+        public IActionResult Perfil(int? id)
         {
-            Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorCpf(doador);
+            Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorId(id);
             if (resultadoDaBusca.Doacoes == null)
             {
                 resultadoDaBusca.Doacoes = new List<Doacao>();
             }
             ViewBag.doacoes = resultadoDaBusca.Doacoes;
-            return View();
+            return View(resultadoDaBusca);
         }
 
         public IActionResult Alterar(Doador doador)

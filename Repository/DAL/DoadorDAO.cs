@@ -14,15 +14,14 @@ namespace Repository.DAL
         }
 
         //Métodos dentro de um controller são de chamados de actions
-        public bool CadastrarDoador(Doador d)
+        public int CadastrarDoador(Doador d)
         {
             if (BuscarDoadorPorCpf(d) == null)
             {
                 _context.Doadores.Add(d);
                 _context.SaveChanges();
-                return true;
             }
-            return false;
+            return d.IdDoador;
         }
 
         public Doador BuscarDoadorPorCpf(Doador d)
@@ -32,11 +31,11 @@ namespace Repository.DAL
                 .FirstOrDefault(x => x.Cpf.Equals(d.Cpf));
         }
 
-        public Doador BuscarDoadorPorId(Doador d)
+        public Doador BuscarDoadorPorId(int? id)
         {
             return _context.Doadores
                 .Include("Doacoes")
-                .FirstOrDefault(x => x.IdDoador.Equals(d.IdDoador));
+                .FirstOrDefault(x => x.IdDoador.Equals(id));
         }
 
         public void AlterarDoador(Doador doador)
