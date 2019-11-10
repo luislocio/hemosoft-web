@@ -39,9 +39,9 @@ namespace HemosoftWeb.Controllers
                 d.StatusDoacao = GetStatusDoacao(d.TriagemClinica, d.ImpedimentosDefinitivos);
                 d.TriagemLaboratorial = new TriagemLaboratorial();
                 _doacaoDAO.CadastrarDoacao(d);
-                
+
                 // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
-                return RedirectToAction("Index", "Home", "Index");
+                return RedirectToAction("perfil", d);
             }
             return View(d);
         }
@@ -51,9 +51,11 @@ namespace HemosoftWeb.Controllers
             return View();
         }
 
-        public IActionResult Perfil()
+        public IActionResult Perfil(int idDoacao)
         {
-            return View();
+            Doacao parametroDaBusca = new Doacao { IdDoacao = idDoacao };
+            Doacao resultadoDaBusca = _doacaoDAO.BuscarDoacaoPorId(parametroDaBusca);
+            return View(resultadoDaBusca);
         }
 
         #region Validação de status e atributos

@@ -32,7 +32,7 @@
             <div class="form-group">
                 <label asp-for="ImpedimentosTemporarios.BebidaAlcoolica" class="control-label">Bebeu nas ultimas 12 horas?</label>
                 <input asp-for="ImpedimentosTemporarios.BebidaAlcoolicaUltimaVez" class="ml-3" id="inputBebidaAlcoolicaUltimaVez" placeholder="# horas" type="text" disabled /><br />
-                <input asp-for="ImpedimentosTemporarios.BebidaAlcoolica" onclick="validarRadioButtonBebida()" type="radio" value="false" />Não<br />
+                <input asp-for="ImpedimentosTemporarios.BebidaAlcoolica" onclick="validarRadioButtonBebida()" type="radio" value="false" required />Não<br />
                 <input asp-for="ImpedimentosTemporarios.BebidaAlcoolica" id="radioButtonSimBebida" onclick="validarRadioButtonBebida()" type="radio" value="true" />Sim<br />
                 <span asp-validation-for="ImpedimentosTemporarios.BebidaAlcoolica" class="text-danger"></span>
             </div>
@@ -40,7 +40,7 @@
             <div class="form-group">
                 <label asp-for="ImpedimentosTemporarios.Gravidez" class="control-label">Gravidez recente</label>
                 <input asp-for="ImpedimentosTemporarios.GravidezUltimaVez" class="ml-3" id="inputGravidezUltimaVez" placeholder="# dias" type="text" disabled /><br />
-                <input asp-for="ImpedimentosTemporarios.Gravidez" onclick="validarRadioButtonGravidez()" type="radio" value="0" />Não<br />
+                <input asp-for="ImpedimentosTemporarios.Gravidez" onclick="validarRadioButtonGravidez()" type="radio" value="0" required />Não<br />
                 <input asp-for="ImpedimentosTemporarios.Gravidez" id="radioButtonGravidezNormal" onclick="validarRadioButtonGravidez()" type="radio" value="1" />Parto Normal (90 dias)<br />
                 <input asp-for="ImpedimentosTemporarios.Gravidez" id="radioButtonGravidezCesarea" onclick="validarRadioButtonGravidez()" type="radio" value="2" />Parto Cesárea (180 dias)<br />
                 <span asp-validation-for="ImpedimentosTemporarios.Gravidez" class="text-danger"></span>
@@ -49,7 +49,7 @@
             <div class="form-group">
                 <label asp-for="ImpedimentosTemporarios.Gripe" class="control-label">Gripe/resfriado nos ultimos 7 dias?</label>
                 <input asp-for="ImpedimentosTemporarios.GripeUltimaVez" class="ml-3" id="inputGripeUltimaVez" placeholder="# dias" type="text" disabled /><br />
-                <input asp-for="ImpedimentosTemporarios.Gripe" onclick="validarRadioButtonGripe()" type="radio" value="false" />Não<br />
+                <input asp-for="ImpedimentosTemporarios.Gripe" onclick="validarRadioButtonGripe()" type="radio" value="false" required />Não<br />
                 <input asp-for="ImpedimentosTemporarios.Gripe" id="radioButtonSimGripe" onclick="validarRadioButtonGripe()" type="radio" value="true" />Sim<br />
                 <span asp-validation-for="ImpedimentosTemporarios.Gripe" class="text-danger"></span>
             </div>
@@ -57,14 +57,14 @@
             <div class="form-group">
                 <label asp-for="ImpedimentosTemporarios.Tatuagem" class="control-label">Tatuagem nos ultimos 12 meses?</label>
                 <input asp-for="ImpedimentosTemporarios.TatuagemUltimaVez" class="ml-3" id="inputTatuagemUltimaVez" placeholder="# meses" type="text" disabled /><br />
-                <input asp-for="ImpedimentosTemporarios.Tatuagem" onclick="validarRadioButtonTatuagem()" type="radio" value="false" />Não<br />
+                <input asp-for="ImpedimentosTemporarios.Tatuagem" onclick="validarRadioButtonTatuagem()" type="radio" value="false" required />Não<br />
                 <input asp-for="ImpedimentosTemporarios.Tatuagem" id="radioButtonSimTatuagem" onclick="validarRadioButtonTatuagem()" type="radio" value="true" />Sim<br />
                 <span asp-validation-for="ImpedimentosTemporarios.Tatuagem" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="ImpedimentosDefinitivos.AntecedenteAvc" class="control-label">Antecedente de AVC?</label><br />
-                <input asp-for="ImpedimentosDefinitivos.AntecedenteAvc" type="radio" value="false" />Não<br />
+                <input asp-for="ImpedimentosDefinitivos.AntecedenteAvc" type="radio" value="false" required />Não<br />
                 <input asp-for="ImpedimentosDefinitivos.AntecedenteAvc" type="radio" value="true" />Sim<br />
                 <span asp-validation-for="ImpedimentosDefinitivos.AntecedenteAvc" class="text-danger"></span>
             </div>
