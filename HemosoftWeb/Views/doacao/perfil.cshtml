@@ -83,7 +83,10 @@
             </div>
             <div id="botoes" class="row">
                 <div class="form-group ml-auto mr-3">
-                    <input asp-controller="doacao" asp-action="cadastrar" type="submit" value="Cadastrar Exame Laboratorial" class="btn btn-default" id="btn-nova-doacao" />
+                    <input asp-controller="exame" asp-action="cadastrar" type="submit" value="Cadastrar Exame Laboratorial" class="btn btn-default" id="btn-cadastrar-exame" />
+                </div>
+                <div class="form-group ml-auto mr-3">
+                    <input asp-controller="doacao" asp-action="confirmarColeta" type="submit" value="Cadastrar Exame Laboratorial" class="btn btn-default" id="btn-confimar-coleta" />
                 </div>
             </div>
         </form>

@@ -1,6 +1,51 @@
-﻿@{
-    ViewData["Title"] = "cadastrar";
+﻿@model Domain.Models.TriagemLaboratorial
+@using Domain.Enum
+@{
+    ViewData["Title"] = "Cadastro de Exame Laboratorial";
 }
-
-<h2>cadastrar</h2>
-
+<h2>Cadastro de Exame Laboratorial</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <form asp-action="cadastrar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="Doacao.Doador.TipoSanguineo" class="control-label">Tipo Sanguineo</label>
+                    <select asp-for="Doacao.Doador.TipoSanguineo" asp-items="Html.GetEnumSelectList<TipoSanguineo>()" class="form-control" required>
+                        <option value="" selected>-- SELECIONE UMA OPÇÃO --</option>
+                    </select>
+                    <span asp-validation-for="Doacao.Doador.TipoSanguineo" class="text-danger"></span>
+                </div>
+                <div class="form-group ml-auto">
+                    <label asp-for="Doacao.Doador.FatorRh" class="control-label">Fator RH</label>
+                    <select asp-for="Doacao.Doador.FatorRh" asp-items="Html.GetEnumSelectList<FatorRh>()" class="form-control" required>
+                        <option value="" selected>-- SELECIONE UMA OPÇÃO --</option>
+                    </select>
+                    <span asp-validation-for="Doacao.Doador.FatorRh" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="HepatiteB" class="control-label">Hepatite B</label><br />
+                <input asp-for="HepatiteB" type="radio" value="false" required />Não<br />
+                <input asp-for="HepatiteB" type="radio" value="true" />Sim<br />
+                <span asp-validation-for="HepatiteB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HepatiteC" class="control-label">Hepatite C</label><br />
+                <input asp-for="HepatiteC" type="radio" value="false" required />Não<br />
+                <input asp-for="HepatiteC" type="radio" value="true" />Sim<br />
+                <span asp-validation-for="HepatiteC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hiv" class="control-label">Hiv</label><br />
+                <input asp-for="Hiv" type="radio" value="false" required />Não<br />
+                <input asp-for="Hiv" type="radio" value="true" />Sim<br />
+                <span asp-validation-for="Hiv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
