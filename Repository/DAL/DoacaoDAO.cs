@@ -13,10 +13,11 @@ namespace Repository.DAL
             _context = context;
         }
 
-        public void CadastrarDoacao(Doacao d)
+        public int CadastrarDoacao(Doacao d)
         {
             _context.Doacoes.Add(d);
             _context.SaveChanges();
+            return d.IdDoacao;
         }
 
         public Doacao BuscarUltimaDoacaoPorDoador(Doador d)
@@ -36,7 +37,7 @@ namespace Repository.DAL
             return _context.Doacoes.Any(x => x.TriagemLaboratorial.StatusTriagem == t.StatusTriagem);
         }
 
-        public Doacao BuscarDoacaoPorId(Doacao d)
+        public Doacao BuscarDoacaoPorId(int? idDoacao)
         {
             //Where: é método que retorna todas as
             //ocorrências em uma busca
@@ -46,7 +47,7 @@ namespace Repository.DAL
                 .Include("TriagemLaboratorial")
                 .Include("ImpedimentosTemporarios")
                 .Include("ImpedimentosDefinitivos")
-                .FirstOrDefault(x => x.IdDoacao.Equals(d.IdDoacao));
+                .FirstOrDefault(x => x.IdDoacao.Equals(idDoacao));
         }
 
         public List<Doacao> BuscarDoacaoPorStatus(Doacao d)

@@ -1,6 +1,7 @@
 ﻿using Domain.Enum;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Repository.DAL;
 using System;
 
@@ -38,10 +39,10 @@ namespace HemosoftWeb.Controllers
                 d.TriagemClinica.StatusTriagem = GetStatusTriagemClinica(d.ImpedimentosTemporarios);
                 d.StatusDoacao = GetStatusDoacao(d.TriagemClinica, d.ImpedimentosDefinitivos);
                 d.TriagemLaboratorial = new TriagemLaboratorial();
-                _doacaoDAO.CadastrarDoacao(d);
+                int id = _doacaoDAO.CadastrarDoacao(d);
 
                 // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
-                return RedirectToAction("perfil", d);
+                return RedirectToAction("perfil", new RouteValueDictionary { { "id", id } });
             }
             return View(d);
         }
@@ -55,10 +56,9 @@ namespace HemosoftWeb.Controllers
             return View(_doacaoDAO.BuscarDoacaoPorStatus(doacao));
         }
 
-        public IActionResult Perfil(int idDoacao)
+        public IActionResult Perfil(int? id)
         {
-            Doacao parametroDaBusca = new Doacao { IdDoacao = idDoacao };
-            Doacao resultadoDaBusca = _doacaoDAO.BuscarDoacaoPorId(parametroDaBusca);
+            Doacao resultadoDaBusca = _doacaoDAO.BuscarDoacaoPorId(id);
             return View(resultadoDaBusca);
         }
 
