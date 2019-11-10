@@ -21,8 +21,6 @@ namespace Repository.DAL
 
         public Doacao BuscarUltimaDoacaoPorDoador(Doador d)
         {
-            //Where: é método que retorna todas as
-            //ocorrências em uma busca
             return _context.Doacoes
                 .Include("Doador")
                 .Include("TriagemClinica")

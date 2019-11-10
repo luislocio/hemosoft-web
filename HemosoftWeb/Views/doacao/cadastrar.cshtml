@@ -1,6 +1,140 @@
-﻿@{
-    ViewData["Title"] = "cadastrar";
+﻿@model Domain.Models.Doacao
+@{
+    ViewData["Title"] = "Cadastro de Doacões";
 }
 
-<h2>cadastrar</h2>
+<h2>Cadastro de Doações</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <form asp-action="cadastrar" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Doador" class="form-control" id="inputId" readonly hidden />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TriagemClinica.Peso" class="control-label">Peso</label>
+                <input asp-for="TriagemClinica.Peso" class="form-control" />
+                <span asp-validation-for="TriagemClinica.Peso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TriagemClinica.Pulso" class="control-label">Pulso</label>
+                <input asp-for="TriagemClinica.Pulso" class="form-control" type="text" />
+                <span asp-validation-for="TriagemClinica.Pulso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TriagemClinica.Temperatura" class="control-label">Temperatura</label>
+                <input asp-for="TriagemClinica.Temperatura" class="form-control" />
+                <span asp-validation-for="TriagemClinica.Temperatura" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImpedimentosTemporarios.BebidaAlcoolica" class="control-label">Bebeu nas ultimas 12 horas?</label>
+                <input asp-for="ImpedimentosTemporarios.BebidaAlcoolicaUltimaVez" class="ml-3" id="inputBebidaAlcoolicaUltimaVez" placeholder="# horas" type="text" disabled /><br />
+                <input asp-for="ImpedimentosTemporarios.BebidaAlcoolica" onclick="validarRadioButtonBebida()" type="radio" value="false" />Não<br />
+                <input asp-for="ImpedimentosTemporarios.BebidaAlcoolica" id="radioButtonSimBebida" onclick="validarRadioButtonBebida()" type="radio" value="true" />Sim<br />
+                <span asp-validation-for="ImpedimentosTemporarios.BebidaAlcoolica" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImpedimentosTemporarios.Gravidez" class="control-label">Gravidez recente</label>
+                <input asp-for="ImpedimentosTemporarios.GravidezUltimaVez" class="ml-3" id="inputGravidezUltimaVez" placeholder="# dias" type="text" disabled /><br />
+                <input asp-for="ImpedimentosTemporarios.Gravidez" onclick="validarRadioButtonGravidez()" type="radio" value="0" />Não<br />
+                <input asp-for="ImpedimentosTemporarios.Gravidez" id="radioButtonGravidezNormal" onclick="validarRadioButtonGravidez()" type="radio" value="1" />Parto Normal (90 dias)<br />
+                <input asp-for="ImpedimentosTemporarios.Gravidez" id="radioButtonGravidezCesarea" onclick="validarRadioButtonGravidez()" type="radio" value="2" />Parto Cesárea (180 dias)<br />
+                <span asp-validation-for="ImpedimentosTemporarios.Gravidez" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImpedimentosTemporarios.Gripe" class="control-label">Gripe/resfriado nos ultimos 7 dias?</label>
+                <input asp-for="ImpedimentosTemporarios.GripeUltimaVez" class="ml-3" id="inputGripeUltimaVez" placeholder="# dias" type="text" disabled /><br />
+                <input asp-for="ImpedimentosTemporarios.Gripe" onclick="validarRadioButtonGripe()" type="radio" value="false" />Não<br />
+                <input asp-for="ImpedimentosTemporarios.Gripe" id="radioButtonSimGripe" onclick="validarRadioButtonGripe()" type="radio" value="true" />Sim<br />
+                <span asp-validation-for="ImpedimentosTemporarios.Gripe" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImpedimentosTemporarios.Tatuagem" class="control-label">Tatuagem nos ultimos 12 meses?</label>
+                <input asp-for="ImpedimentosTemporarios.TatuagemUltimaVez" class="ml-3" id="inputTatuagemUltimaVez" placeholder="# meses" type="text" disabled /><br />
+                <input asp-for="ImpedimentosTemporarios.Tatuagem" onclick="validarRadioButtonTatuagem()" type="radio" value="false" />Não<br />
+                <input asp-for="ImpedimentosTemporarios.Tatuagem" id="radioButtonSimTatuagem" onclick="validarRadioButtonTatuagem()" type="radio" value="true" />Sim<br />
+                <span asp-validation-for="ImpedimentosTemporarios.Tatuagem" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImpedimentosDefinitivos.AntecedenteAvc" class="control-label">Antecedente de AVC?</label><br />
+                <input asp-for="ImpedimentosDefinitivos.AntecedenteAvc" type="radio" value="false" />Não<br />
+                <input asp-for="ImpedimentosDefinitivos.AntecedenteAvc" type="radio" value="true" />Sim<br />
+                <span asp-validation-for="ImpedimentosDefinitivos.AntecedenteAvc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    // Radio buttons
+    const radioButtonSimBebida = document.getElementById("radioButtonSimBebida");
+    const radioButtonGravidezNormal = document.getElementById("radioButtonGravidezNormal");
+    const radioButtonGravidezCesarea = document.getElementById("radioButtonGravidezCesarea");
+    const radioButtonSimGripe = document.getElementById("radioButtonSimGripe");
+    const radioButtonSimTatuagem = document.getElementById("radioButtonSimTatuagem");
+
+    // Input fields
+    const inputBebidaAlcoolicaUltimaVez = document.getElementById("inputBebidaAlcoolicaUltimaVez");
+    const inputGravidezUltimaVez = document.getElementById("inputGravidezUltimaVez");
+    const inputGripeUltimaVez = document.getElementById("inputGripeUltimaVez");
+    const inputTatuagemUltimaVez = document.getElementById("inputTatuagemUltimaVez");
+
+    // Habilita o campo de input conforme estado do radio button - Bebida
+    function validarRadioButtonBebida() {
+        if (radioButtonSimBebida.checked) {
+            inputBebidaAlcoolicaUltimaVez.removeAttribute("disabled");
+            inputBebidaAlcoolicaUltimaVez.setAttribute("required", "true");
+        }
+        else {
+            inputBebidaAlcoolicaUltimaVez.setAttribute("disabled", "true");
+            inputBebidaAlcoolicaUltimaVez.removeAttribute("required");
+        }
+    }
+
+    // Habilita o campo de input conforme estado do radio button - Gravidez
+    function validarRadioButtonGravidez() {
+        if (radioButtonGravidezNormal.checked || radioButtonGravidezCesarea.checked) {
+            inputGravidezUltimaVez.removeAttribute("disabled");
+            inputGravidezUltimaVez.setAttribute("required", "true");
+        }
+        else {
+            inputGravidezUltimaVez.setAttribute("disabled", "true");
+            inputGravidezUltimaVez.removeAttribute("required");
+        }
+    }
+
+    // Habilita o campo de input conforme estado do radio button - Gripe
+    function validarRadioButtonGripe() {
+        if (radioButtonSimGripe.checked) {
+            inputGripeUltimaVez.removeAttribute("disabled");
+            inputGripeUltimaVez.setAttribute("required", "true");
+        }
+        else {
+            inputGripeUltimaVez.setAttribute("disabled", "true");
+            inputGripeUltimaVez.removeAttribute("required");
+        }
+    }
+
+    // Habilita o campo de input conforme estado do radio button - Tatuagem
+    function validarRadioButtonTatuagem() {
+        if (radioButtonSimTatuagem.checked) {
+            inputTatuagemUltimaVez.removeAttribute("disabled");
+            inputTatuagemUltimaVez.setAttribute("required", "true");
+        }
+        else {
+            inputTatuagemUltimaVez.setAttribute("disabled", "true");
+            inputTatuagemUltimaVez.removeAttribute("required");
+        }
+    }
+
+</script>
 

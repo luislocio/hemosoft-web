@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\HemosoftWeb",
-    "\\HemosoftWeb\\DAL",
-    "\\HemosoftWeb\\Views\\doador"
+    "\\HemosoftWeb"
   ],
-  "SelectedNode": "\\HemosoftWeb\\HemosoftWeb.csproj",
   "PreviewInSolutionExplorer": false
 }
