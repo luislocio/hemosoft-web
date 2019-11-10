@@ -48,7 +48,11 @@ namespace HemosoftWeb.Controllers
 
         public IActionResult Listar()
         {
-            return View();
+            Doacao doacao = new Doacao();
+            doacao.StatusDoacao = StatusDoacao.AguardandoAtendimento;
+
+            // TODO: Listar apenas doações com status DISPONIVEL
+            return View(_doacaoDAO.BuscarDoacaoPorStatus(doacao));
         }
 
         public IActionResult Perfil(int idDoacao)

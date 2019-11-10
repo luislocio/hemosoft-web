@@ -1,6 +1,37 @@
-﻿@{
-    ViewData["Title"] = "listar";
+﻿@model List<Doacao>
+@{
+    ViewData["Title"] = "Listar Doações";
 }
 
-<h2>listar</h2>
 
+<h2>Listar Doações</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <table style="margin-bottom:15px;margin-top:15px"
+               class="table table-hover table-striped">
+            <thead>
+                <tr class="table-active">
+                    <th># Doação</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Doacao item in Model)
+                {
+                    <tr>
+                        <td>@item.IdDoacao</td>
+                        <td>@item.DataDoacao</td>
+                        <td>@item.StatusDoacao </td>
+                        <td>
+                            <a class="btn btn-primary" asp-action="Alterar" asp-route-id="@item.IdDoacao">Visualizar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
