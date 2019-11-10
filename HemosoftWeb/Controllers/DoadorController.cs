@@ -1,7 +1,7 @@
 ﻿using Domain.Models;
+using HemosoftWeb.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Repository.DAL;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace HemosoftWeb.Controllers
@@ -24,14 +24,22 @@ namespace HemosoftWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: [INPUT] - Validar cpf.
-                if (_doadorDAO.CadastrarDoador(d))
+                if (Validacao.CpfEhValido(d.Cpf))
                 {
-                    // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
-                    return RedirectToAction("Index", "Home", "Index");
+                    if (_doadorDAO.CadastrarDoador(d))
+                    {
+                        // TODO: [FEEDBACK] - Apresentar mensagem de sucesso.
+                        ModelState.AddModelError("Success", "Doador cadastrado com sucesso.");
+                    }
+                    else
+                    {
+                        // TODO: [FEEDBACK] - Apresentar mensagem de sucesso.
+                        ModelState.AddModelError("Success", "Este doador já possui cadastro.");
+                    }
+                    return RedirectToAction("perfil", d);
                 }
-                // TODO: [REGRA] - Redirecionar para o perfil do doador. 
-                ModelState.AddModelError("", "Esse doador já possui cadastro.");
+                // CPF inválido
+                ModelState.AddModelError("", "CPF Inválido!");
                 return View(d);
             }
             return View(d);
@@ -45,8 +53,7 @@ namespace HemosoftWeb.Controllers
         [HttpPost]
         public IActionResult Buscar(string cpf)
         {
-            // TODO: [INPUT] - Validar cpf.
-            if (cpf != null)
+            if (Validacao.CpfEhValido(cpf))
             {
                 Doador parametroDaBusca = new Doador { Cpf = cpf };
                 Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorCpf(parametroDaBusca);
@@ -61,11 +68,11 @@ namespace HemosoftWeb.Controllers
                     return View();
                 }
             }
-
             ModelState.AddModelError("", "CPF Inválido");
             return View();
         }
 
+        [HttpPost]
         public IActionResult Perfil(Doador doador)
         {
             if (doador.Doacoes == null)
