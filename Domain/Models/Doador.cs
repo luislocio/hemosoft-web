@@ -16,9 +16,11 @@ namespace Domain.Models
         [Required(ErrorMessage = "Campo obrigatório!")]
         public string NomeCompleto { get; set; }
 
+        // TODO: [FEEDBACK] Mensagem de validação não aparece na view.
         [Required(ErrorMessage = "Campo obrigatório!")]
         public EstadoCivil EstadoCivil { get; set; }
 
+        // TODO: [FEEDBACK] Mensagem de validação não aparece na view.
         [Required(ErrorMessage = "Campo obrigatório!")]
         public Genero Genero { get; set; }
 
