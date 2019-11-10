@@ -32,23 +32,11 @@ namespace Repository.DAL
                 .FirstOrDefault(x => x.Cpf.Equals(d.Cpf));
         }
 
-        public Doador BuscarDoadorPorNomeCompleto(Doador d)
+        public Doador BuscarDoadorPorId(Doador d)
         {
-            return _context.Doadores.FirstOrDefault
-                (x => x.NomeCompleto.Equals(d.NomeCompleto));
-        }
-
-        public List<Doador> BuscarDoadorPorParteNome(Doador d)
-        {
-            //Where: é método que retorna todas as ocorrências em uma busca
-            return _context.Doadores.Where
-                (x => x.NomeCompleto.Contains(d.NomeCompleto)).ToList();
-        }
-
-        public Doador BuscarDoadorPorEstadoCivil(Doador d)
-        {
-            return _context.Doadores.FirstOrDefault
-                (x => x.EstadoCivil.Equals(d.EstadoCivil));
+            return _context.Doadores
+                .Include("Doacoes")
+                .FirstOrDefault(x => x.IdDoador.Equals(d.IdDoador));
         }
 
         public void AlterarDoador(Doador doador)

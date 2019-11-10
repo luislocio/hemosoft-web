@@ -72,14 +72,14 @@ namespace HemosoftWeb.Controllers
             return View();
         }
 
-        [HttpPost]
         public IActionResult Perfil(Doador doador)
         {
-            if (doador.Doacoes == null)
+            Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorCpf(doador);
+            if (resultadoDaBusca.Doacoes == null)
             {
-                doador.Doacoes = new List<Doacao>();
+                resultadoDaBusca.Doacoes = new List<Doacao>();
             }
-            ViewBag.doacoes = doador.Doacoes;
+            ViewBag.doacoes = resultadoDaBusca.Doacoes;
             return View();
         }
 
@@ -87,15 +87,18 @@ namespace HemosoftWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: [INPUT] - Validar cpf.
-                _doadorDAO.AlterarDoador(doador);
+                if (Validacao.CpfEhValido(doador.Cpf))
+                {
+                    _doadorDAO.AlterarDoador(doador);
+                    Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorCpf(doador);
 
-                // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
-                Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorCpf(doador);
-                return RedirectToAction("perfil", resultadoDaBusca);
+                    // TODO: [FEEDBACK] - Apresentar mensagem de sucesso.
+                    return RedirectToAction("perfil", resultadoDaBusca);
+                }
+                ModelState.AddModelError("", "CPF Inválido");
+                return View();
             }
-            // TODO: [FEEDBACK] - Mostrar mensagem de erro.
-            return RedirectToAction("perfil", doador);
+            return View(doador);
         }
     }
 }

@@ -60,7 +60,6 @@
                     </a>
                 </div>
             </div>
-
             @* Tabela de doações *@
             <table style="margin-bottom:15px;margin-top:15px"
                    class="table table-hover table-striped">
@@ -80,10 +79,7 @@
                             <td>@item.DataDoacao</td>
                             <td>@item.StatusDoacao </td>
                             <td>
-                                <a class="btn btn-primary" asp-action="Remover" asp-route-id="@item.IdDoacao">Remover</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-danger" asp-action="Alterar" asp-route-id="@item.IdDoacao">Alterar</a>
+                                <a class="btn btn-primary" asp-controller="doacao" asp-action="perfil" asp-route-id="@item.IdDoacao">Visualizar</a>
                             </td>
                         </tr>
                     }
