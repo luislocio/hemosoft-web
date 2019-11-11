@@ -43,8 +43,8 @@ namespace HemosoftWeb.Controllers
             {
                 doacao.DataDoacao = DateTime.Now;
                 doacao.Doador = _doadorDAO.BuscarDoadorPorId(doacao.Doador.IdDoador);
-                doacao.StatusDoacao = GetStatusDoacao(doacao.TriagemClinica, doacao.ImpedimentosDefinitivos);
                 doacao.TriagemClinica.StatusTriagem = GetStatusTriagemClinica(doacao.ImpedimentosTemporarios);
+                doacao.StatusDoacao = GetStatusDoacao(doacao.TriagemClinica, doacao.ImpedimentosDefinitivos);
                 doacao.TriagemLaboratorial = new TriagemLaboratorial();
                 int idDoacao = _doacaoDAO.CadastrarDoacao(doacao);
 
@@ -69,6 +69,13 @@ namespace HemosoftWeb.Controllers
             return View(resultadoDaBusca);
         }
 
+        public IActionResult ConfirmarColeta(Doacao doacao)
+        {
+            doacao.StatusDoacao = StatusDoacao.AguardandoResultados;
+            _doacaoDAO.AlterarDoacao(doacao);
+
+            return RedirectToAction("perfil", new RouteValueDictionary { { "id", doacao.IdDoacao } });
+        }
         #region Validação de status e atributos
         private StatusDoacao GetStatusDoacao(TriagemClinica triagemClinica, ImpedimentosDefinitivos impedimentosDefinitivos)
         {
