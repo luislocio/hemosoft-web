@@ -49,7 +49,7 @@ namespace HemosoftWeb.Controllers
                 doacao.StatusDoacao = GetStatusDoacao(doacao);
 
                 _doacaoDAO.AlterarDoacao(doacao);
-                _doadorDAO.AlterarDoador(doador);
+                //_doadorDAO.AlterarDoador(doador);
 
                 // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
                 return RedirectToAction("perfil", "doacao", new RouteValueDictionary { { "id", doacao.IdDoacao } });
@@ -87,8 +87,8 @@ namespace HemosoftWeb.Controllers
         {
             Doador retornoDoador = doadorDoacao;
 
-            doadorFormulario.TipoSanguineo = doadorFormulario.TipoSanguineo;
-            doadorFormulario.FatorRh = doadorFormulario.FatorRh;
+            retornoDoador.TipoSanguineo = doadorFormulario.TipoSanguineo;
+            retornoDoador.FatorRh = doadorFormulario.FatorRh;
 
             return retornoDoador;
         }
