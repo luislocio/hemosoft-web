@@ -9,12 +9,21 @@ namespace HemosoftWeb.Controllers
 {
     public class DoacaoController : Controller
     {
+        // TODO: REMOVER TRIADOR
+        Triador triador;
+        private readonly TriadorDAO _triadorDAO;
+
+
         private readonly DoacaoDAO _doacaoDAO;
         private readonly DoadorDAO _doadorDAO;
-        public DoacaoController(DoacaoDAO doacaoDAO, DoadorDAO doadorDAO)
+        public DoacaoController(DoacaoDAO doacaoDAO, DoadorDAO doadorDAO, TriadorDAO triadorDAO)
         {
             _doacaoDAO = doacaoDAO;
             _doadorDAO = doadorDAO;
+
+            //TODO: REMOVER TRIADOR
+            _triadorDAO = triadorDAO;
+            this.triador = _triadorDAO.BuscarTriadorPorId(1);
         }
 
         public IActionResult Index()
@@ -41,11 +50,17 @@ namespace HemosoftWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                doacao.DataDoacao = DateTime.Now;
-                doacao.Doador = _doadorDAO.BuscarDoadorPorId(doacao.Doador.IdDoador);
-                doacao.TriagemClinica.StatusTriagem = GetStatusTriagemClinica(doacao.ImpedimentosTemporarios);
-                doacao.StatusDoacao = GetStatusDoacao(doacao.TriagemClinica, doacao.ImpedimentosDefinitivos);
-                doacao.TriagemLaboratorial = new TriagemLaboratorial();
+                Doador doador = _doadorDAO.BuscarDoadorPorId(doacao.Doador.IdDoador);
+                // Informações do formulário.
+                ImpedimentosDefinitivos impedimentosDefinitivos = CriarImpedimentosDefinitivos(doacao);
+                ImpedimentosTemporarios impedimentosTemporarios = CriarImpedimentosTemporarios(doacao);
+                TriagemClinica triagemClinica = CriarTriagemClinica(doacao);
+
+                // Informações que serão preenchidas após recebimento do exame laboratorial.
+                TriagemLaboratorial triagemLaboratorial = new TriagemLaboratorial { };
+
+                doacao = CriarDoacao(impedimentosTemporarios, triagemClinica, impedimentosDefinitivos, triagemLaboratorial, doador, triador);
+
                 int idDoacao = _doacaoDAO.CadastrarDoacao(doacao);
 
                 // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
@@ -76,6 +91,7 @@ namespace HemosoftWeb.Controllers
 
             return RedirectToAction("perfil", new RouteValueDictionary { { "id", doacao.IdDoacao } });
         }
+
         #region Validação de status e atributos
         private StatusDoacao GetStatusDoacao(TriagemClinica triagemClinica, ImpedimentosDefinitivos impedimentosDefinitivos)
         {
@@ -99,6 +115,55 @@ namespace HemosoftWeb.Controllers
 
             return StatusTriagem.Reprovado;
         }
+        #endregion
+
+        #region Criação de objetos para cadastro
+        private Doacao CriarDoacao(ImpedimentosTemporarios impedimentosTemporarios, TriagemClinica triagemClinica, ImpedimentosDefinitivos impedimentosDefinitivos, TriagemLaboratorial triagemLaboratorial, Doador doador, Triador triador)
+        {
+            return new Doacao
+            {
+                DataDoacao = DateTime.Now,
+                Doador = doador,
+                Triador = triador,
+                TriagemClinica = triagemClinica,
+                TriagemLaboratorial = triagemLaboratorial,
+                StatusDoacao = GetStatusDoacao(triagemClinica, impedimentosDefinitivos),
+                ImpedimentosTemporarios = impedimentosTemporarios,
+                ImpedimentosDefinitivos = impedimentosDefinitivos
+            };
+        }
+
+        private ImpedimentosDefinitivos CriarImpedimentosDefinitivos(Doacao doacao)
+        {
+            return new ImpedimentosDefinitivos { AntecedenteAvc = doacao.ImpedimentosDefinitivos.AntecedenteAvc };
+        }
+
+        private ImpedimentosTemporarios CriarImpedimentosTemporarios(Doacao doacao)
+        {
+            return new ImpedimentosTemporarios
+            {
+                BebidaAlcoolica = doacao.ImpedimentosTemporarios.BebidaAlcoolica,
+                BebidaAlcoolicaUltimaVez = doacao.ImpedimentosTemporarios.BebidaAlcoolicaUltimaVez,
+                Gravidez = doacao.ImpedimentosTemporarios.Gravidez,
+                GravidezUltimaVez = doacao.ImpedimentosTemporarios.GravidezUltimaVez,
+                Gripe = doacao.ImpedimentosTemporarios.Gripe,
+                GripeUltimaVez = doacao.ImpedimentosTemporarios.GripeUltimaVez,
+                Tatuagem = doacao.ImpedimentosTemporarios.Tatuagem,
+                TatuagemUltimaVez = doacao.ImpedimentosTemporarios.TatuagemUltimaVez
+            };
+        }
+
+        private TriagemClinica CriarTriagemClinica(Doacao doacao)
+        {
+            return new TriagemClinica
+            {
+                Peso = doacao.TriagemClinica.Peso,
+                Pulso = doacao.TriagemClinica.Pulso,
+                Temperatura = doacao.TriagemClinica.Temperatura,
+                StatusTriagem = GetStatusTriagemClinica(doacao.ImpedimentosTemporarios)
+            };
+        }
+
         #endregion
     }
 }

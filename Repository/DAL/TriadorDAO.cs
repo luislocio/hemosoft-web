@@ -31,10 +31,10 @@ namespace Repository.DAL
                 (x => x.Matricula.Equals(t.Matricula));
         }
 
-        public Triador BuscarTriadorPorId(Triador t)
+        public Triador BuscarTriadorPorId(int? id)
         {
             return _context.Triadores.FirstOrDefault
-                (x => x.IdTriador.Equals(t.IdTriador));
+                (x => x.IdTriador.Equals(id));
         }
 
         public List<Triador> ListarTriadores()

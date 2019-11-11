@@ -2,6 +2,7 @@
 @using Domain.Enum
 @{
     ViewData["Title"] = "Cadastro de Exame Laboratorial";
+    int idDoacaoBag = ViewBag.idDoacao;
 }
 <h2>Cadastro de Exame Laboratorial</h2>
 <hr />
@@ -9,6 +10,9 @@
     <div class="col-md-4 mx-auto">
         <form asp-action="cadastrar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Doacao.IdDoacao" id="inputId" class="form-control" value="@idDoacaoBag" readonly hidden />
+            </div>
             <div class="row">
                 <div class="form-group">
                     <label asp-for="Doacao.Doador.TipoSanguineo" class="control-label">Tipo Sanguineo</label>
