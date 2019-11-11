@@ -10,17 +10,12 @@
     }
 </style>
 
-
-
 <h2>Perfil do doador</h2>
 <hr />
 <div class="row">
     <div class="col-md-4 mx-auto">
         <form asp-action="cadastrar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="IdDoador" id="inputId" class="form-control" readonly hidden />
-            </div>
             <div class="form-group">
                 <label asp-for="NomeCompleto" class="control-label">Nome Completo</label>
                 <input asp-for="NomeCompleto" id="inputNome" class="form-control" readonly />
@@ -55,7 +50,7 @@
                 </div>
 
                 <div class="form-group ml-auto mr-3">
-                    <a class="btn btn-default" asp-controller="doacao" asp-action="cadastrar">
+                    <a class="btn btn-default" asp-controller="doacao" asp-action="cadastrar" asp-route-id="@Model.IdDoador">
                         Nova Doação
                     </a>
                 </div>

@@ -1,6 +1,7 @@
 ﻿@model Domain.Models.Doacao
 @{
     ViewData["Title"] = "Cadastro de Doacões";
+    int idDoadorBag = ViewBag.idDoador;
 }
 
 <h2>Cadastro de Doações</h2>
@@ -10,9 +11,8 @@
         <form asp-action="cadastrar" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input asp-for="Doador" class="form-control" id="inputId" readonly hidden />
+                <input asp-for="Doador.IdDoador" class="form-control" id="inputId" value="@idDoadorBag" hidden readonly />
             </div>
-
             <div class="form-group">
                 <label asp-for="TriagemClinica.Peso" class="control-label">Peso</label>
                 <input asp-for="TriagemClinica.Peso" class="form-control" />

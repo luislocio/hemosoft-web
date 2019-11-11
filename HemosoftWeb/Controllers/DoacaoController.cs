@@ -10,9 +10,11 @@ namespace HemosoftWeb.Controllers
     public class DoacaoController : Controller
     {
         private readonly DoacaoDAO _doacaoDAO;
-        public DoacaoController(DoacaoDAO doacaoDAO)
+        private readonly DoadorDAO _doadorDAO;
+        public DoacaoController(DoacaoDAO doacaoDAO, DoadorDAO doadorDAO)
         {
             _doacaoDAO = doacaoDAO;
+            _doadorDAO = doadorDAO;
         }
 
         public IActionResult Index()
@@ -25,26 +27,31 @@ namespace HemosoftWeb.Controllers
             return View();
         }
 
-        public IActionResult Cadastrar()
+        public IActionResult Cadastrar(int? id)
         {
+            ViewBag.idDoador = id;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(Doacao d)
+        public IActionResult Cadastrar(Doacao doacao)
         {
+            ModelState.Remove("Doador.Cpf");
+            ModelState.Remove("Doador.NomeCompleto");
+
             if (ModelState.IsValid)
             {
-                d.DataDoacao = DateTime.Now;
-                d.TriagemClinica.StatusTriagem = GetStatusTriagemClinica(d.ImpedimentosTemporarios);
-                d.StatusDoacao = GetStatusDoacao(d.TriagemClinica, d.ImpedimentosDefinitivos);
-                d.TriagemLaboratorial = new TriagemLaboratorial();
-                int id = _doacaoDAO.CadastrarDoacao(d);
+                doacao.DataDoacao = DateTime.Now;
+                doacao.Doador = _doadorDAO.BuscarDoadorPorId(doacao.Doador.IdDoador);
+                doacao.StatusDoacao = GetStatusDoacao(doacao.TriagemClinica, doacao.ImpedimentosDefinitivos);
+                doacao.TriagemClinica.StatusTriagem = GetStatusTriagemClinica(doacao.ImpedimentosTemporarios);
+                doacao.TriagemLaboratorial = new TriagemLaboratorial();
+                int idDoacao = _doacaoDAO.CadastrarDoacao(doacao);
 
                 // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
-                return RedirectToAction("perfil", new RouteValueDictionary { { "id", id } });
+                return RedirectToAction("perfil", new RouteValueDictionary { { "id", idDoacao } });
             }
-            return View(d);
+            return View(doacao);
         }
 
         public IActionResult Listar()
