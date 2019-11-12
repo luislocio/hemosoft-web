@@ -24,7 +24,7 @@ namespace Repository.DAL
                 return true;
             }
 
-                       return false;
+            return false;
         }
 
         public Solicitante BuscarSolicitantePorCnpj(Solicitante s)
@@ -33,10 +33,10 @@ namespace Repository.DAL
                 (x => x.Cnpj.Equals(s.Cnpj));
         }
 
-        public Solicitante BuscarSolicitantePorId(Solicitante s)
+        public Solicitante BuscarSolicitantePorId(int? id)
         {
             return _context.Solicitantes.FirstOrDefault
-                (x => x.IdSolicitante.Equals(s.IdSolicitante));
+                (x => x.IdSolicitante.Equals(id));
         }
 
         public Solicitante BuscarSolicitantePorRazaoSocial(Solicitante s)
