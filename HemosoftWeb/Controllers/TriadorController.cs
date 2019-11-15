@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Repository.DAL;
 
 namespace HemosoftWeb.Controllers
@@ -16,26 +17,31 @@ namespace HemosoftWeb.Controllers
         {
             return View();
         }
-        public IActionResult Buscar()
-        {
-            return View();
-        }
 
         [HttpPost]
-        public IActionResult Cadastrar(Triador t)
+        public IActionResult Cadastrar(Triador triador)
         {
             if (ModelState.IsValid)
             {
-                if (_triadorDAO.CadastrarTriador(t))
+                int idTriador = _triadorDAO.CadastrarTriador(triador);
+                if (idTriador != 0)
                 {
-                    // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
-                    return RedirectToAction("Index", "Home", "Index");
+                    // TODO: [FEEDBACK] - Apresentar mensagem de sucesso.
+                    ModelState.AddModelError("Success", "Triador cadastrado com sucesso.");
                 }
-                // TODO: [REGRA] - Redirecionar para o perfil do doador. 
-                ModelState.AddModelError("", "Esse triador já existe!");
-                return View(t);
+                else
+                {
+                    // TODO: [FEEDBACK] - Apresentar mensagem de sucesso.
+                    ModelState.AddModelError("Success", "Este triador já possui cadastro.");
+                }
+                return RedirectToAction("perfil", new RouteValueDictionary { { "id", idTriador } });
             }
-            return View(t);
+            return View(triador);
+        }
+
+        public IActionResult Buscar()
+        {
+            return View();
         }
 
         [HttpPost]
@@ -49,7 +55,7 @@ namespace HemosoftWeb.Controllers
 
                 if (resultadoDaBusca != null)
                 {
-                    return RedirectToAction("perfil", resultadoDaBusca);
+                    return RedirectToAction("perfil", new RouteValueDictionary { { "id", resultadoDaBusca.IdTriador } });
                 }
                 else
                 {
@@ -61,13 +67,17 @@ namespace HemosoftWeb.Controllers
             ModelState.AddModelError("", "Matricula inválida");
             return View();
         }
+
         public IActionResult Listar()
         {
             return View();
         }
-        public IActionResult Perfil(Triador triador)
+
+        public IActionResult Perfil(int? id)
         {
-            return View();
+            Triador resultadoDaBusca = _triadorDAO.BuscarTriadorPorId(id);
+
+            return View(resultadoDaBusca);
         }
 
         public IActionResult Alterar(Triador triador)

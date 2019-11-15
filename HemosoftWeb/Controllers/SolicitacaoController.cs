@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Domain.Enum;
+﻿using Domain.Enum;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Repository.DAL;
+using System;
+using System.Collections.Generic;
 
 namespace HemosoftWeb.Controllers
 {
@@ -27,13 +25,11 @@ namespace HemosoftWeb.Controllers
             return View();
         }
 
-        // GET: Doador
         public IActionResult Listar()
         {
             return View();
         }
 
-        // GET: Doador
         public IActionResult Perfil()
         {
             return View();

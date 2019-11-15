@@ -77,10 +77,12 @@ namespace HemosoftWeb.Controllers
         public IActionResult Perfil(int? id)
         {
             Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorId(id);
+
             if (resultadoDaBusca.Doacoes == null)
             {
                 resultadoDaBusca.Doacoes = new List<Doacao>();
             }
+
             ViewBag.doacoes = resultadoDaBusca.Doacoes;
             return View(resultadoDaBusca);
         }

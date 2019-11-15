@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Repository.DAL;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,33 +15,35 @@ namespace HemosoftWeb.Controllers
             _solicitanteDAO = solicitanteDAO;
         }
 
-
         public IActionResult Index()
         {
             return View();
         }
 
-        // GET: Solicitante
         public IActionResult Cadastrar()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(Solicitante s)
+        public IActionResult Cadastrar(Solicitante solicitante)
         {
             if (ModelState.IsValid)
             {
-                if (_solicitanteDAO.CadastrarSolicitante(s))
+                int idSolicitante = _solicitanteDAO.CadastrarSolicitante(solicitante);
+                if (idSolicitante != 0)
                 {
-                    // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
-                    return RedirectToAction("Index", "Home", "Index");
+                    // TODO: [FEEDBACK] - Apresentar mensagem de sucesso.
+                    ModelState.AddModelError("Success", "Solicitante cadastrado com sucesso.");
                 }
-                // TODO: [REGRA] - Redirecionar para o perfil do doador. 
-                ModelState.AddModelError("", "Esse solicitante já existe!");
-                return View(s);
+                else
+                {
+                    // TODO: [FEEDBACK] - Apresentar mensagem de sucesso.
+                    ModelState.AddModelError("Success", "Este solicitante já possui cadastro.");
+                }
+                return RedirectToAction("perfil", new RouteValueDictionary { { "id", idSolicitante } });
             }
-            return View(s);
+            return View(solicitante);
         }
 
         public IActionResult Buscar()
@@ -59,7 +62,7 @@ namespace HemosoftWeb.Controllers
 
                 if (resultadoDaBusca != null)
                 {
-                    return RedirectToAction("perfil", resultadoDaBusca);
+                    return RedirectToAction("perfil", new RouteValueDictionary { { "id", resultadoDaBusca.IdSolicitante } });
                 }
                 else
                 {
@@ -72,14 +75,17 @@ namespace HemosoftWeb.Controllers
             return View();
         }
 
-        public IActionResult Perfil(Solicitante solicitante)
+        public IActionResult Perfil(int? id)
         {
-            if (solicitante.Solicitacoes == null)
+            Solicitante resultadoDaBusca = _solicitanteDAO.BuscarSolicitantePorId(id);
+
+            if (resultadoDaBusca.Solicitacoes == null)
             {
-                solicitante.Solicitacoes = new List<Solicitacao>();
+                resultadoDaBusca.Solicitacoes = new List<Solicitacao>();
             }
-            ViewBag.solicitacoes = solicitante.Solicitacoes;
-            return View();
+
+            ViewBag.solicitacoes = resultadoDaBusca.Solicitacoes;
+            return View(resultadoDaBusca);
         }
 
         // GET: Solicitante
