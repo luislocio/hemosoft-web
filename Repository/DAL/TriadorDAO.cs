@@ -12,17 +12,23 @@ namespace Repository.DAL
             _context = context;
         }
 
-        public bool CadastrarTriador(Triador t)
+        public int CadastrarTriador(Triador t)
         {
-            if (BuscarTriadorPorMatricula(t) == null)
+            Triador buscaNoDatabase = BuscarTriadorPorMatricula(t);
+
+            if (buscaNoDatabase == null)
             {
                 t.StatusUsuario = Domain.Enum.StatusUsuario.Ativo;
 
                 _context.Triadores.Add(t);
                 _context.SaveChanges();
-                return true;
+
+                // Id do triador cadastro no database.
+                return t.IdTriador;
             }
-            return false;
+
+            // Id do triador encontrado no database.
+            return buscaNoDatabase.IdTriador;
         }
 
         public Triador BuscarTriadorPorMatricula(Triador t)

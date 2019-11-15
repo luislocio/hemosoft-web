@@ -1,6 +1,5 @@
 ﻿using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Repository.DAL
@@ -13,15 +12,21 @@ namespace Repository.DAL
             _context = context;
         }
 
-        //Métodos dentro de um controller são de chamados de actions
         public int CadastrarDoador(Doador d)
         {
+            Doador buscaNoDatabase = BuscarDoadorPorCpf(d);
+
             if (BuscarDoadorPorCpf(d) == null)
             {
                 _context.Doadores.Add(d);
                 _context.SaveChanges();
+
+                // Id do doador cadastro no database.
+                return d.IdDoador;
             }
-            return d.IdDoador;
+
+            // Id do doador encontrado no database.
+            return buscaNoDatabase.IdDoador;
         }
 
         public Doador BuscarDoadorPorCpf(Doador d)

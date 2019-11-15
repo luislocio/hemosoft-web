@@ -12,8 +12,10 @@ namespace Repository.DAL
             _context = context;
         }
 
-        public bool CadastrarSolicitante(Solicitante s)
+        public int CadastrarSolicitante(Solicitante s)
         {
+            Solicitante buscaNoDatabase = BuscarSolicitantePorCnpj(s);
+
             if (BuscarSolicitantePorCnpj(s) == null)
             {
                 s.StatusUsuario = Domain.Enum.StatusUsuario.Ativo;
@@ -21,10 +23,12 @@ namespace Repository.DAL
                 _context.Solicitantes.Add(s);
                 _context.SaveChanges();
 
-                return true;
+                // Id do solicitante cadastro no database.
+                return s.IdSolicitante;
             }
 
-            return false;
+            // Id do solicitante encontrado no database.
+            return buscaNoDatabase.IdSolicitante;
         }
 
         public Solicitante BuscarSolicitantePorCnpj(Solicitante s)
