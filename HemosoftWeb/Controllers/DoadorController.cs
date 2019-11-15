@@ -97,12 +97,11 @@ namespace HemosoftWeb.Controllers
                     Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorCpf(doador);
 
                     // TODO: [FEEDBACK] - Apresentar mensagem de sucesso.
-                    return RedirectToAction("perfil", resultadoDaBusca);
+                    return RedirectToAction("perfil", new RouteValueDictionary { { "id", resultadoDaBusca.IdDoador } });
                 }
                 ModelState.AddModelError("", "CPF Inválido");
-                return View();
             }
-            return View(doador);
+            return RedirectToAction("perfil", new RouteValueDictionary { { "id", doador.IdDoador } });
         }
     }
 }

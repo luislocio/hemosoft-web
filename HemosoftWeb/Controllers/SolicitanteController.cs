@@ -98,15 +98,14 @@ namespace HemosoftWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: [INPUT] - Validar cpf.
                 _solicitanteDAO.AlterarSolicitante(solicitante);
+                Solicitante resultadoDaBusca = _solicitanteDAO.BuscarSolicitantePorCnpj(solicitante);
 
                 // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
-                Solicitante resultadoDaBusca = _solicitanteDAO.BuscarSolicitantePorCnpj(solicitante);
-                return RedirectToAction("perfil", resultadoDaBusca);
+                return RedirectToAction("perfil", new RouteValueDictionary { { "id", resultadoDaBusca.IdSolicitante } });
             }
             // TODO: [FEEDBACK] - Mostrar mensagem de erro.
-            return RedirectToAction("perfil", solicitante);
+            return RedirectToAction("perfil", new RouteValueDictionary { { "id", solicitante.IdSolicitante } });
         }
 
     }

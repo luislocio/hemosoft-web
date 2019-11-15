@@ -20,6 +20,9 @@
                 <input asp-for="IdSolicitante" class="form-control" id="inputId" readonly hidden />
             </div>
             <div class="form-group">
+                <input asp-for="Senha" class="form-control" id="inputSenha" readonly hidden />
+            </div>
+            <div class="form-group">
                 <label asp-for="Cnpj" class="control-label">CNPJ</label>
                 <input asp-for="Cnpj" class="form-control" id="inputCNPJ" readonly />
                 <span asp-validation-for="Cnpj" class="text-danger"></span>
@@ -55,7 +58,7 @@
         // Habilita campos para edição.
         document.getElementById("inputCNPJ").removeAttribute('readonly');
         document.getElementById("inputRazaoSocial").removeAttribute('readonly');
-         document.getElementById("inputResponsavel").removeAttribute('readonly');
+        document.getElementById("inputResponsavel").removeAttribute('readonly');
 
         // Esconde o botão EDITAR PERFIL
         botaoEditar.parentNode.classList.add('invisivel');

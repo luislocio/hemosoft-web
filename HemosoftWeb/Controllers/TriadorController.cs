@@ -84,15 +84,14 @@ namespace HemosoftWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: [INPUT] - Validar cpf.
                 _triadorDAO.AlterarTriador(triador);
+                Triador resultadoDaBusca = _triadorDAO.BuscarTriadorPorMatricula(triador);
 
                 // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
-                Triador resultadoDaBusca = _triadorDAO.BuscarTriadorPorMatricula(triador);
-                return RedirectToAction("perfil", resultadoDaBusca);
+                return RedirectToAction("perfil", new RouteValueDictionary { { "id", resultadoDaBusca.IdTriador } });
             }
             // TODO: [FEEDBACK] - Mostrar mensagem de erro.
-            return RedirectToAction("perfil", triador);
+            return RedirectToAction("perfil", new RouteValueDictionary { { "id", triador.IdTriador } });
         }
     }
 }
