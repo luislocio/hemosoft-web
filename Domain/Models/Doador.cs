@@ -1,4 +1,5 @@
 ﻿using Domain.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,17 +17,20 @@ namespace Domain.Models
         [Required(ErrorMessage = "Campo obrigatório!")]
         public string NomeCompleto { get; set; }
 
-        // TODO: [FEEDBACK] Mensagem de validação não aparece na view.
         [Required(ErrorMessage = "Campo obrigatório!")]
-        public EstadoCivil EstadoCivil { get; set; }
+        public EstadoCivil? EstadoCivil { get; set; }
 
-        // TODO: [FEEDBACK] Mensagem de validação não aparece na view.
         [Required(ErrorMessage = "Campo obrigatório!")]
-        public Genero Genero { get; set; }
+        public Genero? Genero { get; set; }
 
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public TipoSanguineo? TipoSanguineo { get; set; }
-        public List<Doacao> Doacoes { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório!")]
         public FatorRh? FatorRh { get; set; }
 
+        public DateTime UltimaDoacao { get; set; }
+
+        public List<Doacao> Doacoes { get; set; }
     }
 }

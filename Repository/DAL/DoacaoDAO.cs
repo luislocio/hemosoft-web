@@ -8,6 +8,7 @@ namespace Repository.DAL
     public class DoacaoDAO
     {
         private readonly Context _context;
+
         public DoacaoDAO(Context context)
         {
             _context = context;
@@ -18,18 +19,6 @@ namespace Repository.DAL
             _context.Doacoes.Add(d);
             _context.SaveChanges();
             return d.IdDoacao;
-        }
-
-        public Doacao BuscarUltimaDoacaoPorDoador(Doador d)
-        {
-            return _context.Doacoes
-                .Include("Doador")
-                .Include("TriagemClinica")
-                .Include("TriagemLaboratorial")
-                .Include("ImpedimentosTemporarios")
-                .Include("ImpedimentosDefinitivos")
-                .OrderByDescending(x => x.DataDoacao)
-                .FirstOrDefault(x => x.Doador.IdDoador.Equals(d.IdDoador));
         }
 
         public bool VerificarDoacoesPorStatusTriagemLaboratorial(TriagemLaboratorial t)

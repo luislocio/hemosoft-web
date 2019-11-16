@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Perfil do doador";
     List<Doacao> doacoes = ViewBag.doacoes;
+    int? diasDesdeAUltimaDoacao = ViewBag.diasDesdeAUltimaDoacao;
 }
 <style>
     .invisivel {
@@ -27,22 +28,22 @@
             <div class="form-group">
                 <label asp-for="NomeCompleto" class="control-label">Nome Completo</label>
                 <input asp-for="NomeCompleto" id="inputNome" class="form-control" readonly />
-                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                <span asp-validation-for="NomeCompleto" class="text-danger text-monospace"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cpf" class="control-label">CPF</label>
                 <input asp-for="Cpf" id="inputCpf" class="form-control" readonly />
-                <span asp-validation-for="Cpf" class="text-danger"></span>
+                <span asp-validation-for="Cpf" class="text-danger text-monospace"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EstadoCivil" class="control-label">Estado Civil</label>
                 <select asp-for="EstadoCivil" id="selectEstadoCivil" asp-items="Html.GetEnumSelectList<EstadoCivil>()" class="form-control" disabled></select>
-                <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+                <span asp-validation-for="EstadoCivil" class="text-danger text-monospace"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Genero" class="control-label">Gênero</label>
                 <select asp-for="Genero" id="selectGenero" asp-items="Html.GetEnumSelectList<Genero>()" class="form-control" disabled></select>
-                <span asp-validation-for="Genero" class="text-danger"></span>
+                <span asp-validation-for="Genero" class="text-danger text-monospace"></span>
             </div>
             <div class="row mx-3 justify-content-between">
                 <div class="form-group">
@@ -63,11 +64,23 @@
                     <input asp-controller="doador" asp-action="alterar" type="submit" value="Salvar Perfil" class="btn btn-primary" id="btn-salvar-perfil" />
                 </div>
 
-                <div class="form-group ml-auto mr-3">
-                    <a class="btn btn-default" asp-controller="doacao" asp-action="cadastrar" asp-route-id="@Model.IdDoador" id="btn-nova-doacao">
-                        Nova Doação
-                    </a>
-                </div>
+                @* Desabilita botão NOVA DOAÇÃO caso a ultima doação tenha ocorrido a menos de 90 dias. *@
+                @if (diasDesdeAUltimaDoacao != null && diasDesdeAUltimaDoacao > 90)
+                {
+                    <div class="form-group ml-auto mr-3">
+                        <a class="btn btn-default" asp-controller="doacao" asp-action="cadastrar" asp-route-id="@Model.IdDoador" id="btn-nova-doacao">
+                            Nova Doação
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group ml-auto mr-3">
+                        <a class="btn btn-default disabled" asp-controller="doacao" asp-action="cadastrar" asp-route-id="@Model.IdDoador" id="btn-nova-doacao">
+                            Nova Doação
+                        </a>
+                    </div>
+                }
             </div>
         </form>
         @* Tabela de doações *@

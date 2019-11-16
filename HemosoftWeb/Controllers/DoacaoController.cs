@@ -52,6 +52,8 @@ namespace HemosoftWeb.Controllers
             if (ModelState.IsValid)
             {
                 Doador doador = _doadorDAO.BuscarDoadorPorId(doacao.Doador.IdDoador);
+                doador.UltimaDoacao = DateTime.Now;
+
                 // Informações do formulário.
                 ImpedimentosDefinitivos impedimentosDefinitivos = CriarImpedimentosDefinitivos(doacao);
                 ImpedimentosTemporarios impedimentosTemporarios = CriarImpedimentosTemporarios(doacao);

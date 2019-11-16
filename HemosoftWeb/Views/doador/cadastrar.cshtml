@@ -13,26 +13,26 @@
             <div class="form-group">
                 <label asp-for="Cpf" class="control-label">CPF</label>
                 <input asp-for="Cpf" class="form-control" />
-                <span asp-validation-for="Cpf" class="text-danger"></span>
+                <span asp-validation-for="Cpf" class="text-danger text-monospace"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NomeCompleto" class="control-label">Nome Completo</label>
                 <input asp-for="NomeCompleto" class="form-control" />
-                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                <span asp-validation-for="NomeCompleto" class="text-danger text-monospace"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EstadoCivil" class="control-label">Estado Civil</label>
                 <select asp-for="EstadoCivil" asp-items="Html.GetEnumSelectList<EstadoCivil>()" class="form-control">
                     <option value="" selected>-- SELECIONE UMA OPÇÃO --</option>
                 </select>
-                <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+                <span asp-validation-for="EstadoCivil" class="text-danger text-monospace"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Genero" class="control-label">Gênero</label>
                 <select asp-for="Genero" asp-items="Html.GetEnumSelectList<Genero>()" class="form-control">
                     <option value="" selected>-- SELECIONE UMA OPÇÃO --</option>
                 </select>
-                <span asp-validation-for="Genero" class="text-danger"></span>
+                <span asp-validation-for="Genero" class="text-danger text-monospace"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Cadastrar" class="btn btn-primary" />

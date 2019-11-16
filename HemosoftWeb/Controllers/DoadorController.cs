@@ -3,6 +3,7 @@ using HemosoftWeb.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Repository.DAL;
+using System;
 using System.Collections.Generic;
 
 namespace HemosoftWeb.Controllers
@@ -10,10 +11,12 @@ namespace HemosoftWeb.Controllers
     public class DoadorController : Controller
     {
         private readonly DoadorDAO _doadorDAO;
+        private readonly DoacaoDAO _doacaoDAO;
 
-        public DoadorController(DoadorDAO doadorDAO)
+        public DoadorController(DoadorDAO doadorDAO, DoacaoDAO doacaoDAO)
         {
             _doadorDAO = doadorDAO;
+            _doacaoDAO = doacaoDAO;
         }
 
         public IActionResult Cadastrar()
@@ -78,10 +81,16 @@ namespace HemosoftWeb.Controllers
         public IActionResult Perfil(int? id)
         {
             Doador resultadoDaBusca = _doadorDAO.BuscarDoadorPorId(id);
+            ViewBag.diasDesdeAUltimaDoacao = null;
 
             if (resultadoDaBusca.Doacoes == null)
             {
                 resultadoDaBusca.Doacoes = new List<Doacao>();
+            }
+
+            if (resultadoDaBusca.UltimaDoacao != default(DateTime))
+            {
+                ViewBag.diasDesdeAUltimaDoacao = (int)resultadoDaBusca.UltimaDoacao.Subtract(DateTime.Now).TotalDays;
             }
 
             ViewBag.doacoes = resultadoDaBusca.Doacoes;

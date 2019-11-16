@@ -6,11 +6,17 @@ namespace HemosoftWeb.Utils
     {
         public static bool CpfEhValido(string cpf)
         {
+            if (cpf == null)
+            {
+                return false;
+            }
+
             cpf = cpf.Replace(".", "").Replace("-", "");
             if (cpf.Length != 11)
             {
                 return false;
             }
+
             switch (cpf)
             {
                 case "11111111111":
