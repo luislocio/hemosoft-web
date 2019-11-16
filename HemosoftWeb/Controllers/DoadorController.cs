@@ -90,7 +90,7 @@ namespace HemosoftWeb.Controllers
 
             if (resultadoDaBusca.UltimaDoacao != default(DateTime))
             {
-                ViewBag.diasDesdeAUltimaDoacao = (int)resultadoDaBusca.UltimaDoacao.Subtract(DateTime.Now).TotalDays;
+                ViewBag.diasDesdeAUltimaDoacao = (int)DateTime.Now.Subtract(resultadoDaBusca.UltimaDoacao).TotalDays;
             }
 
             ViewBag.doacoes = resultadoDaBusca.Doacoes;

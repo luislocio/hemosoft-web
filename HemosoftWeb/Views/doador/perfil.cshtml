@@ -65,7 +65,7 @@
                 </div>
 
                 @* Desabilita botão NOVA DOAÇÃO caso a ultima doação tenha ocorrido a menos de 90 dias. *@
-                @if (diasDesdeAUltimaDoacao != null && diasDesdeAUltimaDoacao > 90)
+                @if (diasDesdeAUltimaDoacao == null || diasDesdeAUltimaDoacao > 90)
                 {
                     <div class="form-group ml-auto mr-3">
                         <a class="btn btn-default" asp-controller="doacao" asp-action="cadastrar" asp-route-id="@Model.IdDoador" id="btn-nova-doacao">
