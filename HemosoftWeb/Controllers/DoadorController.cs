@@ -10,6 +10,7 @@ namespace HemosoftWeb.Controllers
     public class DoadorController : Controller
     {
         private readonly DoadorDAO _doadorDAO;
+
         public DoadorController(DoadorDAO doadorDAO)
         {
             _doadorDAO = doadorDAO;

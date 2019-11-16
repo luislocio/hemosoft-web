@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Repository.DAL;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace HemosoftWeb.Controllers
@@ -10,6 +9,7 @@ namespace HemosoftWeb.Controllers
     public class SolicitanteController : Controller
     {
         private readonly SolicitanteDAO _solicitanteDAO;
+
         public SolicitanteController(SolicitanteDAO solicitanteDAO)
         {
             _solicitanteDAO = solicitanteDAO;
@@ -54,7 +54,6 @@ namespace HemosoftWeb.Controllers
         [HttpPost]
         public IActionResult Buscar(string cnpj)
         {
-            // TODO: [INPUT] - Validar cpf.
             if (cnpj != null)
             {
                 Solicitante parametroDaBusca = new Solicitante { Cnpj = cnpj };
@@ -107,6 +106,5 @@ namespace HemosoftWeb.Controllers
             // TODO: [FEEDBACK] - Mostrar mensagem de erro.
             return RedirectToAction("perfil", new RouteValueDictionary { { "id", solicitante.IdSolicitante } });
         }
-
     }
 }

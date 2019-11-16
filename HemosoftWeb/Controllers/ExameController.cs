@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Domain.Enum;
+﻿using Domain.Enum;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -14,6 +10,7 @@ namespace HemosoftWeb.Controllers
     {
         private readonly DoacaoDAO _doacaoDAO;
         private readonly DoadorDAO _doadorDAO;
+
         public ExameController(DoacaoDAO doacaoDAO, DoadorDAO doadorDAO)
         {
             _doacaoDAO = doacaoDAO;
@@ -59,6 +56,7 @@ namespace HemosoftWeb.Controllers
         }
 
         #region Atualização de atributos da doação
+
         private TriagemLaboratorial AtualizarTriagemLaboratorial(Doacao doacao, TriagemLaboratorial triagemLaboratorial)
         {
             TriagemLaboratorial retornoTriagemLaboratorial = doacao.TriagemLaboratorial;
@@ -92,9 +90,11 @@ namespace HemosoftWeb.Controllers
 
             return retornoDoador;
         }
-        #endregion
+
+        #endregion Atualização de atributos da doação
 
         #region Validação de status e atributos
+
         private StatusTriagem GetStatusExameLaboratorial(TriagemLaboratorial triagemLaboratorial, ImpedimentosDefinitivos impedimentosDefinitivos)
         {
             if (impedimentosDefinitivos.AntecedenteAvc == true ||
@@ -117,6 +117,7 @@ namespace HemosoftWeb.Controllers
 
             return StatusDoacao.NaoDisponivel;
         }
-        #endregion
+
+        #endregion Validação de status e atributos
     }
 }

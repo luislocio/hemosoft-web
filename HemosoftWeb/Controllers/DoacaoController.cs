@@ -10,12 +10,13 @@ namespace HemosoftWeb.Controllers
     public class DoacaoController : Controller
     {
         // TODO: REMOVER TRIADOR
-        Triador triador;
-        private readonly TriadorDAO _triadorDAO;
+        private Triador triador;
 
+        private readonly TriadorDAO _triadorDAO;
 
         private readonly DoacaoDAO _doacaoDAO;
         private readonly DoadorDAO _doadorDAO;
+
         public DoacaoController(DoacaoDAO doacaoDAO, DoadorDAO doadorDAO, TriadorDAO triadorDAO)
         {
             _doacaoDAO = doacaoDAO;
@@ -91,6 +92,7 @@ namespace HemosoftWeb.Controllers
         }
 
         #region Validação de status e atributos
+
         private StatusDoacao GetStatusDoacao(TriagemClinica triagemClinica, ImpedimentosDefinitivos impedimentosDefinitivos)
         {
             if (triagemClinica.StatusTriagem == StatusTriagem.Aprovado &&
@@ -101,6 +103,7 @@ namespace HemosoftWeb.Controllers
 
             return StatusDoacao.AguardandoResultados;
         }
+
         private StatusTriagem GetStatusTriagemClinica(ImpedimentosTemporarios impedimentosTemporarios)
         {
             if (impedimentosTemporarios.BebidaAlcoolica == false &&
@@ -113,9 +116,11 @@ namespace HemosoftWeb.Controllers
 
             return StatusTriagem.Reprovado;
         }
-        #endregion
+
+        #endregion Validação de status e atributos
 
         #region Criação de objetos para cadastro
+
         private Doacao CriarDoacao(ImpedimentosTemporarios impedimentosTemporarios, TriagemClinica triagemClinica, ImpedimentosDefinitivos impedimentosDefinitivos, TriagemLaboratorial triagemLaboratorial, Doador doador, Triador triador)
         {
             return new Doacao
@@ -162,6 +167,6 @@ namespace HemosoftWeb.Controllers
             };
         }
 
-        #endregion
+        #endregion Criação de objetos para cadastro
     }
 }

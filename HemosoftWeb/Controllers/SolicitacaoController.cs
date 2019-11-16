@@ -13,6 +13,7 @@ namespace HemosoftWeb.Controllers
         private readonly SolicitacaoDAO _solicitacaoDAO;
         private readonly DoacaoDAO _doacaoDAO;
         private readonly SolicitanteDAO _solicitanteDAO;
+
         public SolicitacaoController(SolicitacaoDAO solicitacaoDAO, DoacaoDAO doacaoDAO, SolicitanteDAO solicitanteDAO)
         {
             _solicitacaoDAO = solicitacaoDAO;
@@ -55,7 +56,6 @@ namespace HemosoftWeb.Controllers
                 Solicitante = solicitante,
                 Doacoes = new List<Doacao>()
             };
-
 
             doacao.StatusDoacao = StatusDoacao.NaoDisponivel;
             solicitacao.Doacoes.Add(doacao);

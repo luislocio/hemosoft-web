@@ -8,6 +8,7 @@ namespace HemosoftWeb.Controllers
     public class TriadorController : Controller
     {
         private readonly TriadorDAO _triadorDAO;
+
         public TriadorController(TriadorDAO triadorDAO)
         {
             _triadorDAO = triadorDAO;
@@ -47,7 +48,6 @@ namespace HemosoftWeb.Controllers
         [HttpPost]
         public IActionResult Buscar(string matricula)
         {
-
             if (matricula != null)
             {
                 Triador parametroDaBusca = new Triador { Matricula = matricula };
