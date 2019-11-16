@@ -8,13 +8,18 @@
     .invisivel {
         display: none;
     }
+
+    .disabled {
+        pointer-events: none;
+        cursor: default;
+    }
 </style>
 
 <h2>Perfil do doador</h2>
 <hr />
 <div class="row">
-    <div class="col-md-4 mx-auto">
-        <form asp-action="cadastrar">
+    <div class="col-md-6 mx-auto">
+        <form asp-action="cadastrar" class="col-md-8 mx-auto">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <input asp-for="IdDoador" id="inputId" class="form-control" readonly hidden />
@@ -59,37 +64,36 @@
                 </div>
 
                 <div class="form-group ml-auto mr-3">
-                    <a class="btn btn-default" asp-controller="doacao" asp-action="cadastrar" asp-route-id="@Model.IdDoador">
+                    <a class="btn btn-default" asp-controller="doacao" asp-action="cadastrar" asp-route-id="@Model.IdDoador" id="btn-nova-doacao">
                         Nova Doação
                     </a>
                 </div>
             </div>
-            @* Tabela de doações *@
-            <table style="margin-bottom:15px;margin-top:15px"
-                   class="table table-hover table-striped">
-                <thead>
-                    <tr class="table-active">
-                        <th># Doação</th>
-                        <th>Data</th>
-                        <th>Status</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (Doacao item in doacoes)
-                    {
-                        <tr>
-                            <td>@item.IdDoacao</td>
-                            <td>@item.DataDoacao</td>
-                            <td>@item.StatusDoacao </td>
-                            <td>
-                                <a class="btn btn-primary" asp-controller="doacao" asp-action="perfil" asp-route-id="@item.IdDoacao">Visualizar</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
         </form>
+        @* Tabela de doações *@
+        <table class="table my-4 table-sm ">
+            <thead class="thead-dark">
+                <tr>
+                    <th># Doação</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Doacao item in doacoes)
+                {
+                    <tr>
+                        <td class="align-middle">@item.IdDoacao</td>
+                        <td class="align-middle">@item.DataDoacao</td>
+                        <td class="align-middle">@item.StatusDoacao </td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="doacao" asp-action="perfil" asp-route-id="@item.IdDoacao">Visualizar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 <script>
@@ -111,6 +115,6 @@
         botaoSalvar.parentNode.classList.remove('invisivel');
 
         // Desativa o botão NOVA DOAÇÃO
-        document.getElementById("btn-nova-doacao").setAttribute('disabled', true);
+        document.getElementById("btn-nova-doacao").classList.add('disabled');
     })
 </script>

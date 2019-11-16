@@ -1,18 +1,17 @@
 ﻿@model List<Solicitante>
 @{
-    ViewData["Title"] = "Listar Doações";
+    ViewData["Title"] = "Listar Solicitantes";
 }
 
 
-<h2>Listar Doações</h2>
+<h2>Listar Solicitantes</h2>
 <hr />
 
 <div class="row">
     <div class="col-md-6 mx-auto">
-        <table style="margin-bottom:15px;margin-top:15px"
-               class="table table-hover table-striped">
-            <thead>
-                <tr class="table-active">
+        <table class="table my-4 table-sm ">
+            <thead class="thead-dark">
+                <tr>
                     <th scope="col">CNPJ</th>
                     <th scope="col">Razão Social</th>
                     <th scope="col">Responsavel</th>
