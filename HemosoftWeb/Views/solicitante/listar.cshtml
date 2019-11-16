@@ -1,6 +1,39 @@
-﻿@{
-    ViewData["Title"] = "listar";
+﻿@model List<Solicitante>
+@{
+    ViewData["Title"] = "Listar Doações";
 }
 
-<h2>listar</h2>
 
+<h2>Listar Doações</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <table style="margin-bottom:15px;margin-top:15px"
+               class="table table-hover table-striped">
+            <thead>
+                <tr class="table-active">
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">Razão Social</th>
+                    <th scope="col">Responsavel</th>
+                    <th scope="col">StatusUsuario</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Solicitante item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">@item.Cnpj</td>
+                        <td class="align-middle">@item.RazaoSocial</td>
+                        <td class="align-middle">@item.Responsavel</td>
+                        <td class="align-middle">@item.StatusUsuario</td>
+                        <td class="align-middle">
+                            <a class="btn btn-primary" asp-action="perfil" asp-route-id="@item.IdSolicitante">Visualizar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -70,7 +70,7 @@ namespace HemosoftWeb.Controllers
 
         public IActionResult Listar()
         {
-            return View();
+            return View(_triadorDAO.ListarTriadores());
         }
 
         public IActionResult Perfil(int? id)

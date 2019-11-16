@@ -91,7 +91,7 @@ namespace HemosoftWeb.Controllers
         // GET: Solicitante
         public IActionResult Listar()
         {
-            return View();
+            return View(_solicitanteDAO.ListarSolicitantes());
         }
 
         public IActionResult Alterar(Solicitante solicitante)

@@ -22,12 +22,12 @@
                         Doador
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-controller="doador" asp-action="cadastrar">
-                            Cadastrar Doador
-                            <span class="sr-only">(current)</span>
-                        </a>
                         <a class="dropdown-item" asp-controller="doador" asp-action="buscar">
                             Buscar Doador
+                            <span class="sr-only">(current)</span>
+                        </a>
+                        <a class="dropdown-item" asp-controller="doador" asp-action="cadastrar">
+                            Cadastrar Doador
                             <span class="sr-only">(current)</span>
                         </a>
                     </div>
@@ -38,12 +38,16 @@
                         Triador
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="triador" asp-action="buscar">
+                            Buscar Triador
+                            <span class="sr-only">(current)</span>
+                        </a>
                         <a class="dropdown-item" asp-controller="triador" asp-action="cadastrar">
                             Cadastrar Triador
                             <span class="sr-only">(current)</span>
                         </a>
-                        <a class="dropdown-item" asp-controller="triador" asp-action="buscar">
-                            Buscar Triador
+                        <a class="dropdown-item" asp-controller="triador" asp-action="listar">
+                            Listar Triadores
                             <span class="sr-only">(current)</span>
                         </a>
                     </div>
@@ -54,12 +58,16 @@
                         Solicitante
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" asp-controller="solicitante" asp-action="buscar">
+                            Buscar Solicitante
+                            <span class="sr-only">(current)</span>
+                        </a>
                         <a class="dropdown-item" asp-controller="solicitante" asp-action="cadastrar">
                             Cadastrar Solicitante
                             <span class="sr-only">(current)</span>
                         </a>
-                        <a class="dropdown-item" asp-controller="solicitante" asp-action="buscar">
-                            Buscar Solicitante
+                        <a class="dropdown-item" asp-controller="solicitante" asp-action="listar">
+                            Listar Solicitantes
                             <span class="sr-only">(current)</span>
                         </a>
                     </div>
