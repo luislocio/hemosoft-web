@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Desconto do doador";
+    string codigoPromocional = ViewBag.codigoPromocional;
+}
+
+<h2>Desconto do doador</h2>
+<hr />
+<div class="row">
+    <div class="col-md-5 mx-auto">
+        <img class="d-flex img-fluid mx-auto" src="https://api.qrserver.com/v1/create-qr-code/?data=@codigoPromocional&amp;size=250x250" alt="" title="" />
+        <h3 class="text-center mt-4">@codigoPromocional</h3>
+    </div>
+</div>
+

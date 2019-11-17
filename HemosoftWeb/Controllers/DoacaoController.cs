@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Repository.DAL;
 using System;
+using System.Net;
 
 namespace HemosoftWeb.Controllers
 {
@@ -97,7 +98,16 @@ namespace HemosoftWeb.Controllers
             doacao.StatusDoacao = StatusDoacao.AguardandoResultados;
             _doacaoDAO.AlterarDoacao(doacao);
 
-            return RedirectToAction("perfil", new RouteValueDictionary { { "id", doacao.IdDoacao } });
+            long codigoGerado = long.Parse(doacao.Doador.Cpf) + DateTime.Now.Ticks;
+
+            return RedirectToAction("desconto", new RouteValueDictionary { { "codigoPromocional", codigoGerado } });
+        }
+
+        public IActionResult Desconto(long? codigoPromocional)
+        {
+            ViewBag.codigoPromocional = codigoPromocional.ToString();
+
+            return View();
         }
 
         #region Validação de status e atributos
