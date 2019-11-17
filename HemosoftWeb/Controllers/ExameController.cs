@@ -1,8 +1,13 @@
 ﻿using Domain.Enum;
 using Domain.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Repository.DAL;
+using System;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
 
 namespace HemosoftWeb.Controllers
 {
@@ -25,7 +30,10 @@ namespace HemosoftWeb.Controllers
         // GET: Doador
         public IActionResult Cadastrar(int? id)
         {
+            Doacao doacao = _doacaoDAO.BuscarDoacaoPorId(id);
             ViewBag.idDoacao = id;
+            ViewBag.tipoSanguineo = doacao.Doador.TipoSanguineo;
+            ViewBag.fatorRh = doacao.Doador.FatorRh;
             return View();
         }
 
@@ -48,13 +56,64 @@ namespace HemosoftWeb.Controllers
                 doacao.StatusDoacao = GetStatusDoacao(doacao);
 
                 _doacaoDAO.AlterarDoacao(doacao);
-                //_doadorDAO.AlterarDoador(doador);
 
+                FileStreamResult stream = contruirPdf(doacao);
+                return stream;
                 // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
-                return RedirectToAction("perfil", "doacao", new RouteValueDictionary { { "id", doacao.IdDoacao } });
+                //return RedirectToAction("perfil", "doacao", new RouteValueDictionary { { "id", doacao.IdDoacao } });
             }
             ViewBag.idDoacao = triagemLaboratorial.Doacao.Doador.IdDoador;
             return View();
+        }
+
+        private FileStreamResult contruirPdf(Doacao doacao)
+        {
+            string apiKey = "2c7b70e8-4f26-407d-89cb-b20be62a9148";
+            string value =
+              "<h1>" + doacao.Doador.NomeCompleto + " - " + doacao.DataDoacao + "</h1>" +
+              "<h3>Tipo Sanguineo</h3>" +
+              "<p>" + doacao.Doador.TipoSanguineo + " " + doacao.Doador.FatorRh + "</p>" +
+              "<h3>Status</h3>" +
+              "<p>" + doacao.StatusDoacao + "</p>" +
+              "<h3>Peso</h3>" +
+              "<p>" + doacao.TriagemClinica.Peso + " kg</p>" +
+              "<h3>Pulso</h3>" +
+              "<p>" + doacao.TriagemClinica.Pulso + " bpm</p>" +
+              "<h3>Temperatura</h3>" +
+              "<p>" + doacao.TriagemClinica.Temperatura + " °C</p>" +
+              "<h3>Bebida Alcoolica Recente</h3>" +
+              "<p>" + doacao.ImpedimentosTemporarios.BebidaAlcoolica + "</p>" +
+              "<h3>Gravidez Recente</h3>" +
+              "<p>" + doacao.ImpedimentosTemporarios.Gravidez + "</p>" +
+              "<h3>Gripe Recente</h3>" +
+              "<p>" + doacao.ImpedimentosTemporarios.Gripe + "</p>" +
+              "<h3>Tatuagem</h3>" +
+              "<p>" + doacao.ImpedimentosTemporarios.Tatuagem +
+              "<h3>Antecedente de AVC</h3>" +
+              "<p>" + doacao.ImpedimentosDefinitivos.AntecedenteAvc + "</p>" +
+              "<h3>Hepatite B</h3>" +
+              "<p>" + doacao.ImpedimentosDefinitivos.HepatiteB + "</p>" +
+              "<h3>Hepatite C</h3>" +
+              "<p>" + doacao.ImpedimentosDefinitivos.HepatiteC + "</p>" +
+              "<h3>HIV</h3>" +
+              "<p>" + doacao.ImpedimentosDefinitivos.Hiv + "</p>";
+
+            using (var client = new WebClient())
+            {
+                // Build the conversion options
+                NameValueCollection options = new NameValueCollection();
+                options.Add("apikey", apiKey);
+                options.Add("value", value);
+
+                // Call the API convert to a PDF
+                MemoryStream ms = new MemoryStream(client.UploadValues("http://api.html2pdfrocket.com/pdf", options));
+
+                // Make the file a downloadable attachment - comment this out to show it directly inside
+                HttpContext.Response.Headers["content-disposition"] = "attachment; filename=" + Guid.NewGuid() + ".pdf";
+
+                // Return the file as a PDF
+                return new FileStreamResult(ms, "application/pdf");
+            }
         }
 
         #region Atualização de atributos da doação
