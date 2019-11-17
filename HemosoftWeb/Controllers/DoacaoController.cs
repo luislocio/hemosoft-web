@@ -58,8 +58,9 @@ namespace HemosoftWeb.Controllers
 
             if (ModelState.IsValid)
             {
+                DateTime dataHoje = DateTime.Now;
                 Doador doador = _doadorDAO.BuscarDoadorPorId(doacao.Doador.IdDoador);
-                // doador.UltimaDoacao = DateTime.Now;
+                doador.UltimaDoacao = dataHoje;
 
                 // Informações do formulário.
                 ImpedimentosDefinitivos impedimentosDefinitivos = CriarImpedimentosDefinitivos(doacao);
@@ -69,7 +70,7 @@ namespace HemosoftWeb.Controllers
                 // Informações que serão preenchidas após recebimento do exame laboratorial.
                 TriagemLaboratorial triagemLaboratorial = new TriagemLaboratorial { };
 
-                doacao = CriarDoacao(impedimentosTemporarios, triagemClinica, impedimentosDefinitivos, triagemLaboratorial, doador, triador);
+                doacao = CriarDoacao(impedimentosTemporarios, triagemClinica, impedimentosDefinitivos, triagemLaboratorial, doador, triador, dataHoje);
 
                 int idDoacao = _doacaoDAO.CadastrarDoacao(doacao);
 
@@ -142,11 +143,11 @@ namespace HemosoftWeb.Controllers
 
         #region Criação de objetos para cadastro
 
-        private Doacao CriarDoacao(ImpedimentosTemporarios impedimentosTemporarios, TriagemClinica triagemClinica, ImpedimentosDefinitivos impedimentosDefinitivos, TriagemLaboratorial triagemLaboratorial, Doador doador, Triador triador)
+        private Doacao CriarDoacao(ImpedimentosTemporarios impedimentosTemporarios, TriagemClinica triagemClinica, ImpedimentosDefinitivos impedimentosDefinitivos, TriagemLaboratorial triagemLaboratorial, Doador doador, Triador triador, DateTime dataHoje)
         {
             return new Doacao
             {
-                DataDoacao = DateTime.Now,
+                DataDoacao = dataHoje,
                 Doador = doador,
                 Triador = triador,
                 TriagemClinica = triagemClinica,
