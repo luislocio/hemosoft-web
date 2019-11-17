@@ -48,11 +48,15 @@ namespace HemosoftWeb.Controllers
         {
             ModelState.Remove("Doador.Cpf");
             ModelState.Remove("Doador.NomeCompleto");
+            ModelState.Remove("Doador.Genero");
+            ModelState.Remove("Doador.EstadoCivil");
+            ModelState.Remove("Doador.TipoSanguineo");
+            ModelState.Remove("Doador.FatorRh");
 
             if (ModelState.IsValid)
             {
                 Doador doador = _doadorDAO.BuscarDoadorPorId(doacao.Doador.IdDoador);
-                doador.UltimaDoacao = DateTime.Now;
+                // doador.UltimaDoacao = DateTime.Now;
 
                 // Informações do formulário.
                 ImpedimentosDefinitivos impedimentosDefinitivos = CriarImpedimentosDefinitivos(doacao);
@@ -69,6 +73,8 @@ namespace HemosoftWeb.Controllers
                 // TODO: [FEEDBACK] - Mostrar mensagem de sucesso.
                 return RedirectToAction("perfil", new RouteValueDictionary { { "id", idDoacao } });
             }
+
+            ViewBag.idDoador = doacao.Doador.IdDoador;
             return View(doacao);
         }
 
@@ -85,8 +91,9 @@ namespace HemosoftWeb.Controllers
             return View(resultadoDaBusca);
         }
 
-        public IActionResult ConfirmarColeta(Doacao doacao)
+        public IActionResult ConfirmarColeta(int? id)
         {
+            Doacao doacao = _doacaoDAO.BuscarDoacaoPorId(id);
             doacao.StatusDoacao = StatusDoacao.AguardandoResultados;
             _doacaoDAO.AlterarDoacao(doacao);
 
@@ -103,7 +110,7 @@ namespace HemosoftWeb.Controllers
                 return StatusDoacao.AguardandoAtendimento;
             }
 
-            return StatusDoacao.AguardandoResultados;
+            return StatusDoacao.NaoDisponivel;
         }
 
         private StatusTriagem GetStatusTriagemClinica(ImpedimentosTemporarios impedimentosTemporarios)

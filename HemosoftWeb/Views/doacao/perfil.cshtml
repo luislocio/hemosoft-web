@@ -2,19 +2,44 @@
 @using Domain.Enum
 @{
     ViewData["Title"] = "Perfil da Doação";
+
+    // TODO: PASSAR USUARIO LOGADO
+    //// TRIADOR
+    //Usuario usuario = new Usuario()
+    //{
+    //    IdUsuario = 1,
+    //    NomeDeUsuario = "Triador",
+    //    TipoUsuario = Domain.Enum.TipoUsuario.Triador
+    //};
+
+    // SOLICITANTE
+    Usuario usuario = new Usuario()
+    {
+        IdUsuario = 1,
+        NomeDeUsuario = "Solicitante",
+        TipoUsuario = Domain.Enum.TipoUsuario.Solicitante
+    };
 }
 <style>
     .invisivel {
         display: none;
     }
+
+    .disabled {
+        pointer-events: none;
+        cursor: default;
+    }
 </style>
 
-<h2>Perfil do doador</h2>
+<h2>Perfil da doação</h2>
 <hr />
 <div class="row">
-    <div class="col-md-4 mx-auto">
+    <div class="col-md-5 mx-auto">
         <form asp-action="cadastrar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="IdDoacao" id="inputId" class="form-control" readonly hidden />
+            </div>
             <div class="form-group">
                 <input asp-for="IdDoacao" id="inputId" class="form-control" readonly hidden />
             </div>
@@ -81,21 +106,49 @@
                 <span asp-validation-for="ImpedimentosDefinitivos.Hiv" class="text-danger text-monospace"></span>
             </div>
             <div id="botoes" class="row">
-                <div class="form-group ml-auto mr-3">
-                    <a asp-controller="exame" asp-action="cadastrar" asp-route-id="@Model.IdDoacao" class="btn btn-default" id="btn-cadastrar-exame">
-                        Cadastrar Exame Laboratorial
-                    </a>
-                </div>
+                @if (usuario.TipoUsuario == TipoUsuario.Triador)
+                {
+                    if (Model.TriagemClinica.StatusTriagem.Equals(StatusTriagem.Aprovado))
+                    {
+                        if (Model.StatusDoacao.Equals(StatusDoacao.AguardandoAtendimento))
+                        {
+                            <div class="form-group ml-auto mr-3">
+                                <a asp-controller="doacao" asp-action="confirmarColeta" asp-route-id="@Model.IdDoacao" class="btn btn-primary" id="btn-confimar-coleta">
+                                    Confirmar Coleta
+                                </a>
+                            </div>
+                        }
 
-                <div class="form-group ml-auto mr-3">
-                    <input asp-controller="doacao" asp-action="confirmarColeta" type="submit" value="Confirmar Coleta" class="btn btn-primary" id="btn-confimar-coleta" />
-                </div>
+                        if (Model.StatusDoacao.Equals(StatusDoacao.AguardandoResultados))
+                        {
+                            <div class="form-group ml-auto mr-3">
+                                <a asp-controller="exame" asp-action="cadastrar" asp-route-id="@Model.IdDoacao" class="btn btn-primary" id="btn-cadastrar-exame">
+                                    Cadastrar Exame Laboratorial
+                                </a>
+                            </div>
+                        }
+                    }
+                }
 
-                <div class="form-group ml-auto mr-3">
-                    <a asp-controller="solicitacao" asp-action="cadastrar" asp-route-id="@Model.IdDoacao" class="btn btn-default" id="btn-solicitar-doacao">
-                        Solicitar Doação
-                    </a>
-                </div>
+                @if (usuario.TipoUsuario == TipoUsuario.Solicitante)
+                {
+                    if (Model.StatusDoacao.Equals(StatusDoacao.Disponivel))
+                    {
+                        <div class="form-group ml-auto mr-3">
+                            <a asp-controller="solicitacao" asp-action="cadastrar" asp-route-id="@Model.IdDoacao" class="btn btn-primary" id="btn-solicitar-doacao">
+                                Solicitar Doação
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group ml-auto mr-3">
+                            <a asp-controller="solicitacao" asp-action="cadastrar" asp-route-id="@Model.IdDoacao" class="btn btn-primary disabled" id="btn-solicitar-doacao">
+                                Solicitar Doação
+                            </a>
+                        </div>
+                    }
+                }
             </div>
         </form>
     </div>

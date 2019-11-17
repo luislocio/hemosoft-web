@@ -27,6 +27,8 @@ namespace HemosoftWeb.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Doador doador)
         {
+            ModelState.Remove("TipoSanguineo");
+            ModelState.Remove("FatorRh");
             if (ModelState.IsValid)
             {
                 if (Validacao.CpfEhValido(doador.Cpf))

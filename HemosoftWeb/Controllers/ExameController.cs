@@ -34,6 +34,8 @@ namespace HemosoftWeb.Controllers
         {
             ModelState.Remove("Doacao.Doador.Cpf");
             ModelState.Remove("Doacao.Doador.NomeCompleto");
+            ModelState.Remove("Doacao.Doador.Genero");
+            ModelState.Remove("Doacao.Doador.EstadoCivil");
 
             if (ModelState.IsValid)
             {

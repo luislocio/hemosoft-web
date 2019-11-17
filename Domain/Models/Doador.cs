@@ -23,10 +23,8 @@ namespace Domain.Models
         [Required(ErrorMessage = "Campo obrigatório!")]
         public Genero? Genero { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório!")]
         public TipoSanguineo? TipoSanguineo { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório!")]
         public FatorRh? FatorRh { get; set; }
 
         public DateTime UltimaDoacao { get; set; }
