@@ -14,6 +14,23 @@ namespace HemosoftWeb.Controllers
         private readonly DoacaoDAO _doacaoDAO;
         private readonly SolicitanteDAO _solicitanteDAO;
 
+        // TODO: PASSAR USUARIO LOGADO
+        //// TRIADOR
+        //Usuario usuario = new Usuario()
+        //{
+        //    IdUsuario = 1,
+        //    NomeDeUsuario = "Triador",
+        //    TipoUsuario = Domain.Enum.TipoUsuario.Triador
+        //};
+
+        // SOLICITANTE
+        private Usuario usuario = new Usuario()
+        {
+            IdUsuario = 1,
+            NomeDeUsuario = "Solicitante",
+            TipoUsuario = Domain.Enum.TipoUsuario.Solicitante
+        };
+
         public SolicitacaoController(SolicitacaoDAO solicitacaoDAO, DoacaoDAO doacaoDAO, SolicitanteDAO solicitanteDAO)
         {
             _solicitacaoDAO = solicitacaoDAO;
@@ -28,12 +45,9 @@ namespace HemosoftWeb.Controllers
 
         public IActionResult Listar()
         {
-            return View();
-        }
+            List<Solicitacao> solicitacoes = _solicitacaoDAO.ListarSolicitacoes();
 
-        public IActionResult Perfil()
-        {
-            return View();
+            return View(solicitacoes);
         }
 
         public IActionResult Cadastrar(int? id)

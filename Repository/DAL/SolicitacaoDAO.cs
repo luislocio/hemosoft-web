@@ -8,6 +8,7 @@ namespace Repository.DAL
     public class SolicitacaoDAO
     {
         private readonly Context _context;
+
         public SolicitacaoDAO(Context context)
         {
             _context = context;
@@ -19,14 +20,13 @@ namespace Repository.DAL
             _context.SaveChanges();
         }
 
-        public List<Solicitacao> BuscarSolicitacoesPorSolicitante(Solicitacao s)
+        public List<Solicitacao> BuscarSolicitacoesPorSolicitante(Solicitante s)
         {
             return _context.Solicitacoes
                 .Include("Solicitante")
                 .Include("Doacoes")
-                .Where(x => x.Solicitante.IdSolicitante.Equals(s.Solicitante.IdSolicitante))
+                .Where(x => x.Solicitante.IdSolicitante.Equals(s.IdSolicitante))
                 .ToList();
-
         }
 
         public Solicitacao BuscarSolicitacaoPorId(Solicitacao s)
