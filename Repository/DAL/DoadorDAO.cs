@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Repository.DAL
@@ -34,6 +35,14 @@ namespace Repository.DAL
             return _context.Doadores
                 .Include("Doacoes")
                 .FirstOrDefault(x => x.Cpf.Equals(d.Cpf));
+        }
+
+        public List<Doador> BuscarDoadorPorTipoSanguineo(Doador d)
+        {
+            return _context.Doadores
+                .Include("Doacoes")
+                .Where(x => x.TipoSanguineo.Equals(d.TipoSanguineo))
+                .Where(x => x.FatorRh.Equals(d.FatorRh)).ToList();
         }
 
         public Doador BuscarDoadorPorId(int? id)
