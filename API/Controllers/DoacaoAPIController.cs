@@ -32,15 +32,19 @@ namespace API.Controllers
                 case "naoDisponivel":
                     doacao.StatusDoacao = StatusDoacao.NaoDisponivel;
                     break;
+
                 case "disponivel":
                     doacao.StatusDoacao = StatusDoacao.Disponivel;
                     break;
+
                 case "aguardandoAtendimento":
                     doacao.StatusDoacao = StatusDoacao.AguardandoAtendimento;
                     break;
+
                 case "aguardandoResultados":
                     doacao.StatusDoacao = StatusDoacao.AguardandoResultados;
                     break;
+
                 default:
                     return BadRequest(new { msg = "Status Inválido" });
             }
@@ -55,7 +59,6 @@ namespace API.Controllers
             {
                 return Ok(new { msg = "Não existem doações com este status" });
             }
-
         }
     }
 }

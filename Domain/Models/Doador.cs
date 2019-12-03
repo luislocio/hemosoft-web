@@ -9,6 +9,9 @@ namespace Domain.Models
     [Table("Doadores")]
     public class Doador
     {
+        // TODO: [ATRIBUTO] 1 - Adicionar atributo no Model.
+        // TODO: [ATRIBUTO] 2 - Executar {add-migration "mensagemDaMigration" -Project:Repository}.
+        // TODO: [ATRIBUTO] 3 - Executar {update-database -Project:Repository}.
         [Key] public int IdDoador { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório!")]

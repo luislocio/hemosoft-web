@@ -27,7 +27,6 @@ namespace API
                 (Configuration.GetConnectionString
                 ("HemosoftWebConnection")));
 
-
             // Configurar a ID dos DAOs
             services.AddScoped<DoacaoDAO>();
             services.AddScoped<DoadorDAO>();

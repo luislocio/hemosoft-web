@@ -7,6 +7,7 @@ namespace Repository.DAL
     public class TriadorDAO
     {
         private readonly Context _context;
+
         public TriadorDAO(Context context)
         {
             _context = context;

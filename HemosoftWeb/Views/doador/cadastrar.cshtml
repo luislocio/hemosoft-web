@@ -10,6 +10,7 @@
     <div class="col-md-4 mx-auto">
         <form asp-action="cadastrar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @{/* TODO: [ATRIBUTO] 4 - Adicionar campo de entrada na view de cadastro.*/}
             <div class="form-group">
                 <label asp-for="Cpf" class="control-label">CPF</label>
                 <input asp-for="Cpf" class="form-control" />

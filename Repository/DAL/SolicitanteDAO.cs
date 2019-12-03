@@ -7,6 +7,7 @@ namespace Repository.DAL
     public class SolicitanteDAO
     {
         private readonly Context _context;
+
         public SolicitanteDAO(Context context)
         {
             _context = context;
@@ -49,7 +50,6 @@ namespace Repository.DAL
                 (x => x.RazaoSocial.Equals(s.RazaoSocial));
         }
 
-
         public List<Solicitante> BuscarSolicitantesPorParteDoNome(Solicitante s)
         {
             //Where: é método que retorna todas as ocorrências em uma busca
@@ -69,4 +69,3 @@ namespace Repository.DAL
         }
     }
 }
-

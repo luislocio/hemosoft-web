@@ -21,10 +21,13 @@ namespace Domain.Models
 
         [ForeignKey("IdTriagemClinica")]
         public TriagemClinica TriagemClinica { get; set; }
+
         [ForeignKey("IdTriagemLaboratorial")]
         public TriagemLaboratorial TriagemLaboratorial { get; set; }
+
         [ForeignKey("IdImpedimentosTemporarios")]
         public ImpedimentosTemporarios ImpedimentosTemporarios { get; set; }
+
         [ForeignKey("IdImpedimentosDefinitivos")]
         public ImpedimentosDefinitivos ImpedimentosDefinitivos { get; set; }
     }

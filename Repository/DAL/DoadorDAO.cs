@@ -8,6 +8,7 @@ namespace Repository.DAL
     public class DoadorDAO
     {
         private readonly Context _context;
+
         public DoadorDAO(Context context)
         {
             _context = context;
@@ -59,4 +60,3 @@ namespace Repository.DAL
         }
     }
 }
-

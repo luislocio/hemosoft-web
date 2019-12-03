@@ -2,9 +2,11 @@
 
 namespace Repository.DAL
 {
-    class SingletonUsuario
+    internal class SingletonUsuario
     {
-        private SingletonUsuario() { }
+        private SingletonUsuario()
+        {
+        }
 
         private static Usuario usuario;
 

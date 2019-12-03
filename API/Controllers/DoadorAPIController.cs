@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Domain.Enum;
+﻿using Domain.Enum;
 using Domain.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository.DAL;
+using System.Collections.Generic;
 
 namespace API.Controllers
 {
@@ -37,15 +33,19 @@ namespace API.Controllers
                 case "A":
                     doador.TipoSanguineo = TipoSanguineo.A;
                     break;
+
                 case "B":
                     doador.TipoSanguineo = TipoSanguineo.B;
                     break;
+
                 case "AB":
                     doador.TipoSanguineo = TipoSanguineo.AB;
                     break;
+
                 case "O":
                     doador.TipoSanguineo = TipoSanguineo.O;
                     break;
+
                 default:
                     return BadRequest(new { msg = "Tipo Sanguineo Inválido" });
             }
@@ -55,9 +55,11 @@ namespace API.Controllers
                 case "negativo":
                     doador.FatorRh = FatorRh.Negativo;
                     break;
+
                 case "positivo":
                     doador.FatorRh = FatorRh.Positivo;
                     break;
+
                 default:
                     return BadRequest(new { msg = "Fator RH Inválido" });
             }

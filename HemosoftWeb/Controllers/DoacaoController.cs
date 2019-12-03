@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Repository.DAL;
 using System;
-using System.Collections.Specialized;
-using System.IO;
-using System.Net;
 
 namespace HemosoftWeb.Controllers
 {

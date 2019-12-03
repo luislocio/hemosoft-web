@@ -9,10 +9,11 @@ namespace HemosoftWeb.Controllers
 {
     public class HomeController : Controller
     {
-        Usuario usuario;
+        private Usuario usuario;
 
         private readonly TriadorDAO _triadorDAO;
         private readonly SolicitanteDAO _solicitanteDAO;
+
         public HomeController(TriadorDAO triadorDAO, SolicitanteDAO solicitanteDAO)
         {
             _triadorDAO = triadorDAO;
